@@ -1,0 +1,869 @@
+@media (max-width: 1600px) {
+  p {
+    font-size: 17px;
+    line-height: 20px;
+    letter-spacing: 0px;
+    word-spacing: 0px;
+  }
+  video {
+    max-width: 100%;
+    height: auto;
+  }
+  h2 {
+    font-size: 34px;
+    line-height: 55px;
+  }
+  header .brand {
+    max-width: 125px;
+  }
+  header .navbar-nav .nav-item {
+    font-size: 13px;
+  }
+  nav.navbar.navbar-expand-lg {
+    margin: auto;
+  }
+  .hero .hero-top p {
+    font-size: 17px;
+  }
+  .hero .hero-inner h1 {
+    font-size: 40px;
+    line-height: 58px;
+    max-width: 710px;
+  }
+  .hero .hero-inner p {
+    max-width: 357px;
+    padding-top: 15px;
+  }
+  .hero-bottom .image-holder img {
+    width: 60px;
+  }
+  .hero .hero-bottom p {
+    max-width: 266px;
+  }
+  .hero .hero-bottom .hero-btn .btn {
+    font-size: 18px;
+    line-height: 18px;
+    padding: 24px 55px;
+  }
+  .hero .hero-bottom {
+    padding: 42px 30px;
+    background-size: contain;
+    background-position: center;
+  }
+  .hero .hero-bottom .rappi-card-txt {
+    left: 20%;
+  }
+  .hero .hero-bottom .rappi-card-txt h3 {
+    line-height: 80px;
+    font-size: 70px;
+  }
+  .rappi-card .rappi-inner p {
+    margin-top: 20px;
+    max-width: 455px;
+  }
+  .rappi-card .rappi-list .image-holder img {
+    width: 38px;
+  }
+  .rappi-card .rappi-list ul .list-wrapper h4 {
+    font-size: 14px;
+    line-height: 20px;
+  }
+  .rappi-card .rappi-list .list-wrapper p {
+    font-size: 10px;
+  }
+  .rappi-inner h2 {
+    max-width: 400px;
+  }
+  .beneficios .rappi-list ul li {
+    font-size: 17px;
+    line-height: 23px;
+  }
+  .beneficios .rappi-list ul li:after {
+    width: 7px;
+    height: 7px;
+    left: -18px;
+    top: 7px;
+  }
+  .rappi-travel .travel-top .image-holder {
+    max-width: 80%;
+  }
+  .rappi-travel .travel-top .image-holder img {
+    width: 110px;
+  }
+  .rappi-travel .rappi-travel-text h3 {
+    font-size: 100px;
+    line-height: 140px;
+  }
+  .rappi-travel .cashback-bg {
+    bottom: -5px;
+  }
+  .rappi-travel .travel-right-sec {
+    margin-top: 40px;
+  }
+  .voce-left h2 {
+    max-width: 400px;
+  }
+  .voce .voce-btn .btn {
+    font-size: 14px;
+    margin-top: 36px;
+    padding: 7px 18px;
+  }
+  footer .footer-brand {
+    max-width: 160px;
+  }
+  footer .inner-text p,
+  footer .copy-right p {
+    font-size: 14px;
+  }
+  footer .footer-social ul li a {
+    padding: 8px;
+    width: 36px;
+    height: 36px;
+  }
+  footer .footer-list ul li {
+    font-size: 14px;
+    margin-bottom: 10px;
+  }
+  img.visa-img {
+    width: 90px;
+  }
+  footer .copy-right {
+    margin-top: 50px;
+  }
+  footer {
+    padding-top: 90px;
+    padding-bottom: 30px;
+  }
+  .cashback .simulacao-main {
+    width: 454px;
+    height: 288px;
+  }
+  .cashback .simulacao-main .simulacao-inner p:nth-child(3),
+  .cashback .simulacao-main .simulacao-inner p:nth-child(5) {
+    font-size: 26px;
+    line-height: 25px;
+  }
+  .simulacao-inner {
+    padding-left: 16px;
+    text-align: center;
+  }
+  .simulacao-inner h2 {
+    margin-bottom: 20px;
+  }
+  .cashback .simulacao-main p {
+    margin-bottom: 15px;
+  }
+  .cashback .simulacao-inner-left img {
+    width: 60px;
+  }
+  .cashback .simulacao-main .inner-left-box {
+    border-radius: 8px;
+    padding: 20px 15px;
+  }
+  .cashback .simulacao-main .inner-left-box p:last-child {
+    font-size: 26px;
+    line-height: 14px;
+  }
+  .cashback .simulacao-inner-left .image-holder {
+    margin-bottom: 27px;
+  }
+  .cashback .cashback-right {
+    min-width: 100%;
+  }
+  .cashback-left img {
+    max-width: 500px;
+  }
+  .admin-panel-form .form-left-part {
+    max-width: 400px;
+    padding-top: 90px;
+    margin-right: 50px;
+  }
+  .admin-panel-form .form-right-part {
+    padding-top: 50px;
+    padding-bottom: 90px;
+  }
+  .admin-panel-form .form {
+    margin-top: 25px;
+  }
+  .admin-panel-form .form-btn .btn {
+    font-size: 18px;
+    line-height: 28px;
+    margin-top: 35px;
+    padding: 13px 10px;
+  }
+  .admin-panel-form .form-right-part img {
+    max-width: 400px;
+  }
+  .admin-panel-form .form-right-part .inner-text p {
+    font-size: 28px;
+    line-height: 30px;
+  }
+  .page-1-hero {
+    padding-bottom: 190px;
+    padding-top: 130px;
+  }
+  .page-1-cashback .visa_card {
+    max-width: 400px;
+  }
+  .page-1-cashback .cashback-bg {
+    bottom: -134px;
+  }
+  .page-1-cashback img.visa_card.man_png {
+    max-width: 260px;
+  }
+  .page-6-hero .wrapper .saber-text h2 {
+    font-size: 26px;
+    line-height: 20px;
+  }
+  .page-1-hero .form-top h1 {
+    font-size: 30px;
+  }
+  .page-6-hero .wrapper .saber-text p {
+    font-size: 18px;
+    max-width: 349px;
+  }
+  .modal-body p {
+    font-weight: normal;
+    font-size: 18px;
+    line-height: 28px;
+    max-width: 269px;
+  }
+  .modal-body {
+    padding: 81px 55px;
+  }
+  .page-9-hero:after {
+    width: 330px;
+    height: 137px;
+  }
+  .page-9-hero .form-top p {
+    font-size: 28px;
+    line-height: 30px;
+    margin-top: 20px;
+  }
+  .page-9-hero label img {
+    cursor: pointer;
+    margin-top: 29px;
+  }
+  .page-11-hero .viza-div img {
+    max-width: 500px;
+  }
+  .page-12-hero .form-top p {
+    font-size: 18px !important;
+  }
+  .page-12-cashback .visa_card {
+    bottom: -90px;
+  }
+  .page-21-hero .password-main {
+    max-width: 300px;
+  }
+  .modal-dialog {
+    max-width: 400px;
+  }
+  .page-9-hero .pra {
+    bottom: 35%;
+    left: 40%;
+  }
+  .page-12-hero .document-tittle h2 {
+    font-size: 22px;
+    line-height: 10px;
+  }
+}
+@media (max-width: 1450px) {
+}
+@media (max-width: 1300px) {
+  .page-9-hero .pra {
+    bottom: 36%;
+    left: 50%;
+    transform: translate(-50%, 0px);
+    max-width: fit-content;
+  }
+  .page-9-hero .pra p {
+    font-size: 14px;
+    line-height: 17px;
+  }
+  .page-9-hero:after {
+    display: none;
+  }
+}
+@media (max-width: 1199px) {
+  .admin-panel .right-part {
+    width: 100%;
+    padding: 50px 15px 40px 15px;
+  }
+  .admin-main {
+    transform: translate(-100%, 0px);
+    z-index: 2;
+  }
+  .admin-main.active {
+    transform: translate(0);
+  }
+  a.switch {
+    font-size: 18px;
+    display: block;
+    padding: 5px 8px;
+    width: 40px;
+    text-align: center;
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    color: #333;
+  }
+  a.switch.m-close {
+    right: 10px;
+    left: auto;
+  }
+  a.switch img {
+    width: 20px;
+  }
+  a.switch {
+    display: block;
+  }
+  .admin-panel .right-part .client-total {
+    height: 40px;
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+  .admin-panel .inner-part {
+    margin-top: 20px;
+    margin-bottom: 20px;
+  }
+  .admin-panel .admin-btn .btn {
+    font-size: 14px;
+    padding: 7px 12px;
+  }
+  .admin-panel .admin-btn .btn:last-child {
+    margin-left: 10px;
+    padding: 7px 12px;
+  }
+  .admin-panel .admin-btn .btn span img {
+    width: 18px;
+  }
+  .admin-panel .right-part table .calender {
+    margin-left: 10px;
+  }
+  .admin-panel .table-bottom .prev .btn {
+    width: auto;
+    margin-right: 10px;
+  }
+  .page-1-hero #reportdate {
+    width: 290px;
+    padding: 10px;
+  }
+}
+@media (max-width: 991px) {
+  header .navbar-nav .nav-item {
+    margin-bottom: 10px;
+  }
+  .table-responsive {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    max-width: 700px;
+    box-shadow: inset 0 0 5px rgb(150 150 150 / 35%);
+  }
+  .admin-panel table {
+    width: 900px;
+  }
+  ul.navbar-nav {
+    background-color: #f2f0f0;
+    padding: 10px;
+  }
+  .navbar-collapse {
+    margin-top: 10px;
+  }
+  .hero {
+    padding-top: 140px;
+  }
+  .hero .hero-inner h1 {
+    font-size: 26px;
+    line-height: 43px;
+    max-width: 452px;
+  }
+  .hero .hero-inner p {
+    padding-bottom: 30px;
+  }
+  .hero .hero-bottom .hero-btn .btn {
+    font-size: 16px;
+    line-height: 16px;
+    padding: 20px 46px;
+  }
+  .hero .hero-wrapper {
+    padding-bottom: 80px;
+  }
+  .rappi-card {
+    padding-top: 70px;
+  }
+  .rappi-card .prime h3 {
+    font-size: 80px;
+    line-height: 130px;
+  }
+  h2 {
+    font-size: 28px;
+    line-height: 38px;
+  }
+  p {
+    font-size: 14px;
+    line-height: 18px;
+  }
+  .rappi-card .rappi-inner p {
+    max-width: 260px;
+    margin-bottom: 20px;
+  }
+  .rappi-card .rappi-list ul li {
+    width: 100%;
+    margin-bottom: 30px;
+  }
+  .rappi-card .rappi-list ul li:nth-child(3),
+  .rappi-card .rappi-list ul li:last-child {
+    margin-top: 0;
+  }
+  .nossos {
+    padding-top: 50px;
+    padding-bottom: 90px;
+  }
+  .nossos .nossos-bottom h5 {
+    font-size: 16px;
+    line-height: 24px;
+    margin-top: 12px;
+  }
+  .nossos-catg img {
+    max-height: 60px;
+    max-width: 65px;
+  }
+  .nossos .nossos-bottom .visa-txt {
+    margin-top: 30px;
+  }
+  .nossos .nossos-top-text {
+    padding-bottom: 50px;
+  }
+  .cashback .rapi-prime h3 {
+    font-size: 40px;
+    line-height: 48px;
+  }
+  .cashback .rapi-prime {
+    top: -56px;
+    left: 56px;
+  }
+  .simulacao-inner h2 {
+    margin-bottom: 10px;
+  }
+  .cashback .simulacao-main .simulacao-inner p:nth-child(3),
+  .cashback .simulacao-main .simulacao-inner p:nth-child(5) {
+    font-size: 20px;
+    line-height: 10px;
+  }
+  .cashback .simulacao-main .inner-left-box p:last-child {
+    font-size: 20px;
+    line-height: 9px;
+  }
+  .cashback .simulacao-main .inner-left-box {
+    border-radius: 8px;
+    padding: 12px 8px;
+  }
+  .cashback-left img {
+    max-width: 250px;
+  }
+  .cashback {
+    padding-top: 60px;
+  }
+  .rappi-card {
+    padding-top: 60px;
+  }
+  .rappi-travel {
+    padding-top: 50px;
+  }
+  .rappi-travel .travel-left-text h6 {
+    font-size: 30px;
+    line-height: 45px;
+  }
+  .swiper-button-next,
+  .swiper-rtl .swiper-button-prev {
+    right: 0px;
+  }
+  .swiper-button-prev,
+  .swiper-rtl .swiper-button-next {
+    left: 0px;
+  }
+  .parceiros {
+    padding-top: 70px;
+    padding-bottom: 70px;
+  }
+  .voce {
+    padding-top: 70px;
+    padding-bottom: 100px;
+  }
+  .voce .image-holder {
+    margin-top: 0;
+    position: absolute;
+    bottom: 0;
+  }
+  .vedio-sec {
+    padding-top: 70px;
+    padding-bottom: 70px;
+  }
+  .vedio-sec .vedio {
+    margin-top: 30px;
+  }
+
+  .page-1-hero {
+    padding-top: 100px !important;
+    padding-bottom: 70px;
+  }
+  .page-1-header {
+    padding-top: 20px;
+  }
+  .page-1-hero .page-1-hero-progress ul:after {
+    border: 1px solid rgba(153, 153, 153, 0.6);
+  }
+  .page-1-hero .page-1-hero-progress ul li:after {
+    width: 10px;
+    height: 10px;
+  }
+  .page-1-hero .form-top {
+    margin-top: 30px;
+    margin-bottom: 15px;
+  }
+  .page-6-hero .wrapper .saber-text p {
+    font-size: 16px;
+    max-width: 300px;
+    line-height: 1.5;
+  }
+  .page-6-hero .wrapper .sim-nao-btn .btn {
+    font-size: 16px;
+    line-height: 16px;
+    padding: 12px 29px;
+  }
+  .page-6-hero .page-6-hero-btn {
+    padding-top: 40px;
+  }
+  .page-1-hero .page-1-hero-btn .btn {
+    padding: 12px 20px;
+    font-size: 14px;
+  }
+  .page-1-cashback img.visa_card.man_png {
+    max-width: 200px;
+    right: 10px;
+    bottom: -50px;
+  }
+  .cashback.page-1-cashback {
+    padding-top: 0px;
+    margin-top: -60px;
+  }
+  .page-1-hero form .form-label {
+    font-size: 14px;
+    line-height: 20px;
+  }
+  .page-1-hero form input,
+  .form-select {
+    height: 40px !important;
+  }
+  .page-1-hero form .form-inner {
+    margin-bottom: 20px;
+  }
+  .page-1-cashback .visa_card {
+    max-width: 200px;
+  }
+  .page-12-hero .form-top p {
+    font-size: 14px !important;
+    margin-top: 0;
+  }
+  .page-21-hero .mm-number-input-item input {
+    border: 0;
+    border-bottom: 2px solid #aba5a5;
+    border-radius: 3px;
+    font-size: 65px;
+    height: 100px;
+  }
+  .page-21-hero .password-main {
+    max-width: 166px;
+    bottom: -60px;
+  }
+  .modal-dialog {
+    margin: auto;
+  }
+  .page-8-hero .front-camera {
+    padding: 30px 10px;
+  }
+  .page-8-hero .front-camera .inner-text p {
+    font-size: 18px;
+    line-height: 29px;
+  }
+  .front-camera .panel {
+    margin-bottom: 40px;
+  }
+  .front-camera {
+    min-height: 300px;
+  }
+  .page-1-hero .form-top h1 {
+    font-size: 20px;
+    line-height: 30px;
+  }
+  .page-13-hero .main-image {
+    padding: 55px 30px;
+    max-height: 350px;
+  }
+  .page-13-hero .inner-text p {
+    font-size: 14px;
+    line-height: 20px;
+  }
+  .page-9-hero .form-top p {
+    font-size: 18px;
+    line-height: 24px;
+  }
+  .page-9-hero label .inner-text p {
+    font-size: 16px;
+    line-height: 16px;
+    margin-top: 30px;
+    margin-bottom: 40px;
+  }
+  .page-11-hero .viza-div img {
+    max-width: 300px;
+  }
+  .page-1-hero #reportdate {
+    width: 210px;
+    padding: 10px;
+  }
+}
+@media (max-width: 767px) {
+  .rappi-card-right-sec img {
+    max-width: 300px;
+  }
+  .rappi-card-left-sec {
+    padding-top: 30px;
+  }
+  .nossos .nossos-catg {
+    margin: 15px auto;
+  }
+  .nossos .nossos-catg-margn {
+    margin-top: 0;
+  }
+  .nossos {
+    padding-bottom: 50px;
+  }
+  .cashback-left img {
+    margin: auto;
+    display: block;
+  }
+  .cashback .simulacao-main {
+    height: 235px;
+    margin: auto;
+    width: 345px;
+  }
+  .cashback .cashback-right {
+    margin-left: auto;
+  }
+  .cashback .rapi-prime h3 {
+    font-size: 27px;
+    line-height: 40px;
+  }
+  .cashback {
+    padding-bottom: 60px;
+  }
+  .beneficios .rappi-card-left-sec {
+    padding-top: 40px;
+  }
+  .travel-left-sec img {
+    max-width: 160px;
+  }
+  .travel-right-sec img {
+    max-width: 240px;
+  }
+  .rappi-travel .rappi-travel-text h3 {
+    font-size: 40px;
+    line-height: 44px;
+  }
+  .rappi-travel .travel-left-text h6 {
+    font-size: 20px;
+    line-height: 35px;
+    text-align: left;
+  }
+  .rappi-travel .travel-left-text p {
+    font-size: 12px;
+    text-align: left;
+  }
+  section.cashback.rappi-travel {
+    padding-bottom: 30px;
+  }
+  .voce .image-holder {
+    bottom: -60px;
+    position: relative;
+  }
+  section.cashback.page-1-cashback .container {
+    max-width: 100%;
+    padding: 0;
+  }
+  .page-1-cashback .cashback-bg {
+    bottom: -20px;
+    position: relative;
+    width: 100%;
+    max-width: 100%;
+    object-fit: cover;
+  }
+  .page-1-cashback .arrows_4 {
+    left: 30%;
+    transform: translate(-40%, -50%);
+    max-width: 150px;
+    top: 50%;
+  }
+  .page-1-cashback img.visa_card.man_png {
+    max-width: 115px;
+    margin-right: -100px;
+    bottom: 64px;
+  }
+  section.cashback.page-1-cashback {
+    padding-bottom: 0 !important;
+  }
+  .page-1-cashback img.visa_card.man_png {
+    max-width: 115px;
+    margin-right: -160px;
+    bottom: -24px;
+  }
+  .page-1-cashback .visa_card {
+    max-width: 200px;
+    bottom: -21px;
+  }
+  .page-1-hero .form-margin {
+    margin-bottom: 20px !important;
+  }
+  .page-1-hero .page-1-hero-btn {
+    margin-top: 20px;
+    z-index: 22;
+    position: relative;
+  }
+  .page-1-hero .page-1-hero-btn .btn {
+    padding: 8px 15px !important;
+    font-size: 12px;
+    line-height: 1.5;
+    border-radius: 5px;
+    margin: 0 5px;
+    height: 34px;
+  }
+  .page-1-cashback .visa_card {
+    max-width: 150px;
+  }
+  .page-8-hero .front-camera .inner-text p {
+    font-size: 16px;
+    line-height: 25px;
+    margin-bottom: 30px;
+  }
+  .front-camera {
+    margin-bottom: 20px !important;
+  }
+  .page-10-cashback img.visa_card.man_png {
+    margin-right: -23px;
+    bottom: -19px;
+    z-index: 2;
+  }
+  .admin-panel-form {
+    background: #f5e8e7;
+    padding-bottom: 30px;
+  }
+  .admin-panel-form .form-control {
+    height: 40px;
+  }
+  .admin-panel-form .form-btn .btn {
+    font-size: 16px;
+    line-height: 18px;
+    padding: 10px 10px;
+  }
+  .admin-panel-form .form .form-label {
+    font-size: 16px;
+    line-height: 20px;
+  }
+  .admin-panel-form .form-left-part {
+    margin-right: auto;
+    margin-left: auto;
+  }
+  .admin-panel-form .form-left-part {
+    padding-top: 40px;
+  }
+  .admin-panel .inner-part {
+    display: block;
+  }
+  .page-12-hero .main-image {
+    margin-top: 30px;
+    text-align: center;
+  }
+  .page-12-hero .main-image figure img {
+    width: auto;
+    margin-top: 40px;
+  }
+  .page-17-hero .file-wrapper {
+    max-width: 540px;
+    padding: 26px 70px;
+  }
+  .page-1-hero #reportdate {
+    width: 100%;
+    padding: 10px;
+  }
+}
+@media (max-width: 575px) {
+  h2 {
+    font-size: 18px;
+    line-height: 22px;
+  }
+  .voce .arrows {
+    left: 0%;
+  }
+  .react-multi-carousel-item {
+    padding: 0px 10px !important;
+  }
+  .react-multi-carousel-track {
+    text-align: center !important;
+  }
+  .vedio-sec .shape-2 {
+    left: 171px;
+  }
+  p {
+    font-size: 10px;
+    line-height: 18px;
+  }
+  .rappi-card-right-sec img {
+    max-width: 250px;
+  }
+  section.cashback.rappi-travel {
+    padding-bottom: 2px;
+  }
+  .travel-left-sec img,
+  .travel-right-sec img {
+    margin-top: 40px;
+  }
+  footer .inner-text p,
+  footer .copy-right p {
+    font-size: 12px;
+  }
+  footer .footer-list ul li {
+    font-size: 12px;
+    margin-bottom: 0px;
+  }
+  header {
+    padding-top: 20px;
+  }
+  .hero .hero-bottom .rappi-card-txt h3 {
+    font-size: 35px;
+  }
+  .hero .hero-inner h1 span:after {
+    bottom: -3px;
+  }
+  .pagination-none {
+    margin-top: 10px;
+  }
+  .admin-panel .table-bottom {
+    display: block;
+  }
+  .travel-right-sec img {
+    max-width: 175px;
+  }
+  .cashback-left img {
+    max-width: 250px;
+  }
+}
+@media (min-width: 768px) and (max-width: 992px) {
+  .page-12-hero .main-image figure img {
+    max-height: 140px;
+  }
+}
+@media (min-width: 992px) {
+  .page-12-hero .main-image figure img {
+    max-height: 220px;
+  }
+}

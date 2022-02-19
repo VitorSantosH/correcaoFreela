@@ -1,0 +1,32 @@
+{
+  "name": "donorformbackend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js",
+    "dev": "nodemon index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.24.0",
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "bcryptjs": "^2.4.3",
+    "express-fileupload": "^1.2.1",
+    "formidable": "^2.0.1",
+    "jsonwebtoken": "^8.5.1",
+    "fs": "^0.0.1-security",
+    "mkdirp": "^1.0.4",
+    "mongodb": "^4.2.1",
+    "mongoose": "^6.1.4",
+    "morgan": "^1.10.0",
+    "multer": "^1.4.4",
+    "nodemon": "^2.0.15",
+    "serve-index": "^1.9.1"
+  }
+}
