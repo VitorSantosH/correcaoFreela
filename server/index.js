@@ -1,7 +1,7 @@
 // config express e filtros ( cors )
 const express = require("express");
 var app = express();
-const BodyParser = require("body-parser");
+//const BodyParser = require("body-parser");
 var cors = require("cors");
 
 
@@ -17,10 +17,12 @@ const morgan = require("morgan");
 
 // rotas 
 const routes = require('./src/routes/routes');
-app.use(BodyParser.json());
 app.use(morgan("dev"));
-app.use(BodyParser.urlencoded({ extended: true }));
+//app.use(BodyParser.json());
+//app.use(BodyParser.urlencoded({ extended: true }));
 app.use(cors());
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 app.use(
   "/ftp",
   express.static("public"),

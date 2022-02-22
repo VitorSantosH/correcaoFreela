@@ -20,6 +20,9 @@ class IncomeProof extends Component {
     this.props.prevStep();
   };
   ipFileHandler = e => {
+    console.log(e.target.value)
+    console.log(e.target.files)
+    
     var files = e.target.files;
     this.setState({
       ipSelectedFile: files,
@@ -61,11 +64,12 @@ class IncomeProof extends Component {
                 <div className="file-wrapper">
                   <label>
                     <img src="images/file-icon.svg" />
+
                     <input
                       type="file"
                       name="file"
                       size="60"
-                      accept="image/jpeg,image/png,application/pdf"
+                      accept="image/*"
                       onChange={this.ipFileHandler}
                     />
                     {this.state.ipFileName ? (

@@ -12,8 +12,11 @@ const con = mongoose.connection;
 const fs = require('fs');
 
 let storage = multer.diskStorage({
+
   destination: async (req, file, cb) => {
+
     console.log(req.body)
+
     if (!req.body.id) {
       !fs.existsSync(__basedir + "/public/uploads/" + req.body.email) && fs.mkdirSync(__basedir + "/public/uploads/" + req.body.email);
       req.body.file = file.originalname;
@@ -42,6 +45,7 @@ let storage = multer.diskStorage({
     }
 
   },
+  
   filename: (req, file, cb) => {
     // console.log(file.originalname);
     cb(null, file.originalname);

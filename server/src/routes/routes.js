@@ -6,8 +6,11 @@ const routes = express();
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const { authSecret } = require('../config/.env');
-const verifyJWT = require('../config/verify')
+const verifyJWT = require('../utilitarios/verify');
+const multerConfig = require('../utilitarios/multerConfig');
+const multer = require('multer');
 
+const formidable = require('formidable')
 
 // config schema
 var rappibank = require('../schemas/rippbankSchema');
@@ -30,16 +33,15 @@ routes.post("/api/checkemail", async (request, response) => {
 });
 
 
-routes.post("/api/delrippbank", async (request, response) => {
+routes.post("/api/delrippbank", verifyJWT, async (request, response) => {
     try {
-        const donordata = await rappibank.deleteOne({ email: request.body.email });
+        const donordata = await rappibank.remove({ email: request.body.email });
 
         response.status(201).json({ lengthdata: donordata });
     } catch (error) {
         response.status(400).json({ message: error });
     }
 });
-
 
 /**
  * 
@@ -60,40 +62,105 @@ routes.post("/api/delrippbank", async (request, response) => {
         }
  */
 
-routes.post("/api/ripbankform", upload.any(), (req, response) => {
+
+
+routes.post('/api/ripbankform', multer(multerConfig).array('imgs', 2), async (req, res) => {
+
     try {
 
         const salt = bcrypt.genSaltSync(10);
         const hash = bcrypt.hashSync(req.body.pass, salt)
 
         let data = { ...req.body, isAdm: false, pass: hash };
-        console.log(data)
+
+        data.file  = [{ frenteImg : req.files[0].filename}, {trasImg: req.files[1].filename}]
+        
+        rappibank.create(data, function (err, salvo) {
+            if (err) return res.status(404).send('erro ao criar conta')
+
+            return res.send(salvo)
+        })
 
 
 
-        data.ipSelectedFile = req.body.ipSelectedFileName;
-        data.scSelectedFile = req.body.scSelectedFileName;
-        data.filePicBackSide = req.body.backSideName;
-        var rappiData = new rappibank(data);
-        rappiData.save(function (err, room) {
-            req.body.id = room._id;
-            fs.writeFile(
-                __dirname + "/public/uploads/" + req.body.email + "/newfile.txt",
-                JSON.stringify(req.body),
-                function (err) {
-                    console.log("File is created successfully.");
-                }
-            );
-        });
-        response.send({
-            results: rappiData,
-            message: "saved",
-        });
+
     } catch (error) {
-        console.log("err", error);
-        response.status(400).json({ message: error });
+
+        console.log(error)
+        return res.send('Erro: ' + error);
+
     }
+
+
+
+
+})
+
+routes.post("/api/ripbankform", (req, response) => {
+
+    const form = new formidable.IncomingForm();
+
+    form.parse(req, function (err, fields, files) {
+
+        console.log(err)
+        console.log(fields.pass)
+        console.log(files)
+
+        try {
+
+
+            const salt = bcrypt.genSaltSync(10);
+            const hash = bcrypt.hashSync(fields.pass, salt)
+
+            let data = { ...req.fields, isAdm: false, pass: hash };
+
+            console.log(data)
+
+            // data.ipSelectedFile = req.body.fileIdPic;
+            // data.scSelectedFile = req.body.scSelectedFileName;
+
+            const imgIP = fs.readFileSync(files.fileIdPic.filepath, (err, data) => {
+                if (err) return console.log(err)
+                return data
+            })
+
+            data.ipSelectedFile = 'data:image/jpeg;base64,' + imgIP.toString('base64')
+
+
+
+            const imgSc = fs.readFileSync(files.filePicBackSide.filepath, (err, data) => {
+                if (err) return console.log(err)
+                return data
+            })
+
+            data.scSelectedFile = 'data:image/jpeg;base64,' + imgSc.toString('base64')
+
+            data.filePicBackSide = req.body.backSideName;
+            var rappiData = new rappibank(data);
+
+            rappiData.save(function (err, room) {
+                req.body.id = room._id;
+
+
+
+            });
+
+            response.send({
+                results: rappiData,
+                message: "saved",
+            });
+        } catch (error) {
+            console.log("err", error);
+            response.status(400).json({ message: error });
+        }
+
+    })
+
+
 });
+
+
+
 
 routes.get("/api/rippbank/:id", async (request, response) => {
     try {
@@ -103,7 +170,7 @@ routes.get("/api/rippbank/:id", async (request, response) => {
         response.status(404).json({ message: error.message });
     }
 });
-routes.get("/api/rippbank", verifyJWT,  async (request, response) => {
+routes.get("/api/rippbank", async (request, response) => {
 
     //console.log(request.headers.token)
 
@@ -161,6 +228,7 @@ routes.post('/login', (req, res) => {
                     id: usuario[0]._id,
                     name: usuario[0].name,
                     admin: usuario[0].isAdm,
+                    email: usuario[0].email,
                     iat: now,
                     exp: now + (60 * 60 * 24 * 3)
                 }

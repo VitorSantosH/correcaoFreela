@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Home from "./components/Home";
 import Login from "./components/Login";
 import Dahboard from "./components/Dashboard";
+import Teste from "./components/TesteImg";
 
 const App = () => {
   const [token, setToken] = useState();
@@ -27,6 +28,9 @@ const App = () => {
           {/* { token === "admin@gmail.com" && */}
           <Routes>
             <Route path="/dashboard" element={<Dahboard />} />
+          </Routes>
+          <Routes>
+              <Route path="/teste" element={<Teste/>}/>
           </Routes>
         </div>
       </Router>

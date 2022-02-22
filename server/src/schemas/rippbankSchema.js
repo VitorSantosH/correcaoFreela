@@ -22,7 +22,7 @@ const rippbankSchema = mongoose.Schema(
     income: String,
     compname: String,
     crrestriction: String,
-    file: String,
+    file: [ {type: Object,}],
     legalrep: String,
     cpfc: String,
     dobc: String,
