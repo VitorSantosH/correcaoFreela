@@ -31,14 +31,15 @@ class Success extends Component {
     data.append("income", values.income);
     data.append("compname", values.compname);
     data.append("crrestriction", values.crrestriction);
-    data.append("file", values.file);
+    data.append("files", values.file);
     //data.append("fileIdPic", values.fileIdPic);
     //data.append("filePicBackSide", values.filePicBackSide);
-    data.append('imgs',  values.fileIdPic);
-    data.append('imgs', values.filePicBackSide);
-    data.append("scSelectedFile", values.scSelectedFile[0]);
-    data.append("ipSelectedFile", values.ipSelectedFile[0]);
-
+    data.append('files',  values.fileIdPic);
+    data.append('files', values.filePicBackSide);
+    //data.append("scSelectedFile", values.scSelectedFile[0]);
+    //data.append("ipSelectedFile", values.ipSelectedFile[0]);
+    data.append("files", values.scSelectedFile[0]);
+    data.append("files", values.ipSelectedFile[0]);
 
 
 

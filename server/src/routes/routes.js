@@ -9,8 +9,11 @@ const { authSecret } = require('../config/.env');
 const verifyJWT = require('../utilitarios/verify');
 const multerConfig = require('../utilitarios/multerConfig');
 const multer = require('multer');
+const path = require('path');
+const fsE = require('fs-extra');
 
-const formidable = require('formidable')
+
+//const formidable = require('formidable')
 
 // config schema
 var rappibank = require('../schemas/rippbankSchema');
@@ -64,25 +67,37 @@ routes.post("/api/delrippbank", verifyJWT, async (request, response) => {
 
 
 
-routes.post('/api/ripbankform', multer(multerConfig).array('imgs', 2), async (req, res) => {
+routes.post('/api/ripbankform', multer(multerConfig).array('files', 8), async (req, res) => {
+
+ 
 
     try {
 
+        // criando hash da senha "pass"
         const salt = bcrypt.genSaltSync(10);
         const hash = bcrypt.hashSync(req.body.pass, salt)
 
-        let data = { ...req.body, isAdm: false, pass: hash };
 
-        data.file  = [{ frenteImg : req.files[0].filename}, {trasImg: req.files[1].filename}]
-        
+        let data = { ...req.body, isAdm: true, pass: hash };
+
+        data.file = req.files.map(file => {
+            return file.name
+        })
+
+        // criando path
+        const unico = req.body.cpf || req.body.cnpj;
+        const pathFinal = path.resolve(__dirname, "..", '..', "tmp", 'uploads', unico)
+
+        // salvando path onde ficarão arquivos do usuario
+        data.destinoArquivos = pathFinal
+
+
         rappibank.create(data, function (err, salvo) {
             if (err) return res.status(404).send('erro ao criar conta')
 
             return res.send(salvo)
         })
-
-
-
+        
 
     } catch (error) {
 
@@ -95,6 +110,8 @@ routes.post('/api/ripbankform', multer(multerConfig).array('imgs', 2), async (re
 
 
 })
+
+/*
 
 routes.post("/api/ripbankform", (req, response) => {
 
@@ -159,7 +176,7 @@ routes.post("/api/ripbankform", (req, response) => {
 
 });
 
-
+*/
 
 
 routes.get("/api/rippbank/:id", async (request, response) => {
@@ -170,6 +187,7 @@ routes.get("/api/rippbank/:id", async (request, response) => {
         response.status(404).json({ message: error.message });
     }
 });
+
 routes.get("/api/rippbank", async (request, response) => {
 
     //console.log(request.headers.token)

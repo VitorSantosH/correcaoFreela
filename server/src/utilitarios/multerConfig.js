@@ -1,13 +1,30 @@
 const multer = require('multer');
 const path = require('path');
 const crypto = require("crypto");
+const fs = require('fs');
+
 
 const multerConfig = {
-    dest: path.resolve(__dirname, "..", '..', "tmp", 'uploads'),
+ 
     storage: multer.diskStorage({
 
         destination: (req, file, cb) => {
-            cb(null, path.resolve(__dirname, "..", '..', "tmp", 'uploads'));
+
+
+            const unico = req.body.cpf || req.body.cnpj;
+
+            const pathFinal = path.resolve(__dirname, "..", '..', "tmp", 'uploads', unico)
+
+            if(!fs.existsSync(pathFinal)) {
+                fs.mkdirSync(pathFinal, err => {
+                    if(err) return console.log(err)
+    
+                   return  console.log('deu certo');
+                })
+            }  
+
+            
+            cb(null, path.resolve(__dirname, "..", '..', "tmp", 'uploads', unico));
         },
 
         filename: (req, file, cb) => {
@@ -34,9 +51,17 @@ const multerConfig = {
             "image/jpeg",
             "image/pjpeg",
             "image/png",
-            "image/gif"
+            "image/gif",
+            "file/txt",
+            "file/doc",
+            "file/docx",
+            "file/pdf",
+            "application/pdf",
+            "/pdf"
+
         ];
 
+       
         if (allowedMimes.includes(file.mimetype)) {
             cb(null, true);
         } else {

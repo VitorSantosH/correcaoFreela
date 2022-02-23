@@ -22,7 +22,7 @@ const rippbankSchema = mongoose.Schema(
     income: String,
     compname: String,
     crrestriction: String,
-    file: [ {type: Object,}],
+    file: [ {type: String,}],
     legalrep: String,
     cpfc: String,
     dobc: String,
@@ -36,6 +36,9 @@ const rippbankSchema = mongoose.Schema(
     isAdm: {
       type: Boolean,
       default: false
+    },
+    destinoArquivos: {
+      type: String
     }
   },
   { timestamps: true }
