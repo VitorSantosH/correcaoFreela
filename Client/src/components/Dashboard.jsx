@@ -136,6 +136,27 @@ class Dashboard extends React.Component {
     changePage(page) {
         this.setState({ currentPage: page });
     }
+    donwloads(e){
+
+        this.state.cadastrados.map(item => {
+
+            const data = {...item}
+            var config = {
+                method: "post",
+                url: "http://localhost:5000/downloads/",
+                data: data,
+            };
+    
+            axios(config)
+                .then( res => {
+                    console.log(res)
+                })
+                .catch(err => [
+                    console.log(err)
+                ])
+        })
+       
+    }
 
     render() {
         const {
@@ -234,18 +255,20 @@ class Dashboard extends React.Component {
                             </span>
                         </div>
                         <div className="admin-btn">
-                            <a href="#" className="btn">
+                            <div className="btn" onClick={e => this.donwloads(e)}>
                                 <span>
                                     <img src="images/download-icon.svg" alt="" />
                                 </span>
                                 Download
-                            </a>
-                            <Link to="/card-app" className="btn">
+                            </div>
+                          {/**
+                           *   <Link to="/card-app" className="btn">
                                 <span>
                                     <img src="images/add.svg" alt="" />
                                 </span>
                                 Adicionar pasta
                             </Link>
+                           */}
                         </div>
                     </div>
                     <div className="table-responsive" style={{ minHeight: "300px" }}>

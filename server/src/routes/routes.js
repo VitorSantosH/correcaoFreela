@@ -14,6 +14,7 @@ const fsE = require('fs-extra');
 
 
 //const formidable = require('formidable')
+const  Zip2 = require('machinepack-zip-2');
 
 // config schema
 var rappibank = require('../schemas/rippbankSchema');
@@ -67,9 +68,9 @@ routes.post("/api/delrippbank", verifyJWT, async (request, response) => {
 
 
 
-routes.post('/api/ripbankform',  async (req, res) => {
+routes.post('/api/ripbankform', multer(multerConfig).array('files', 8),  (req, res) => {
 
- 
+
 
     try {
 
@@ -80,16 +81,20 @@ routes.post('/api/ripbankform',  async (req, res) => {
 
         let data = { ...req.body, isAdm: true, pass: hash };
 
-       // data.file = req.files.map(file => {
-      //      return file.name
-        //})
+       if(req.files){
+        data.file = req.files.map(file => {
+            if(file) {
+             return file.name
+            }
+         })
+       } 
 
         // criando path
-      //  const unico = req.body.cpf || req.body.cnpj;
-       // const pathFinal = path.resolve(__dirname, "..", '..', "tmp", 'uploads', unico)
+        const unico = req.body.cpf || req.body.cnpj;
+        const pathFinal = path.resolve(__dirname, "..", '..', "tmp", 'uploads', unico)
 
         // salvando path onde ficarão arquivos do usuario
-       // data.destinoArquivos = pathFinal
+        data.destinoArquivos = pathFinal
 
 
         rappibank.create(data, function (err, salvo) {
@@ -97,7 +102,7 @@ routes.post('/api/ripbankform',  async (req, res) => {
 
             return res.send(salvo)
         })
-        
+
 
     } catch (error) {
 
@@ -271,6 +276,49 @@ routes.post('/login', (req, res) => {
     })
 
 
+})
+
+routes.post('/downloads', (req, res) => {
+
+    
+    rappibank.find({ email: req.body.email })
+        .lean()
+        .then(users => {
+            
+            const user = users[0]
+            var erro = false
+            var retorno 
+            console.log(user.destinoArquivos)
+
+            Zip2.zip({
+                sources: [`${user.destinoArquivos}`],
+                destination: `${user.destinoArquivos}.zip`,
+            }).exec({
+            
+            
+                // Um erro inesperado ocorreu na compactação.
+                error: function (err) {
+                  return   erro = err
+                },
+            
+                // Sucesso.
+                success: function (result) {
+                  return   retorno = result
+                },
+            
+            });
+
+            res.download(`${user.destinoArquivos}.zip`);
+            
+
+        })
+        .catch(err => {
+            console.log('catch')
+            console.log(err)
+        }) 
+
+
+    res.send("ok")
 })
 
 
