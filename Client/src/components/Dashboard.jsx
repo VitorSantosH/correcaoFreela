@@ -1,8 +1,10 @@
 import React, { Component } from "react";
 import Sidebar from "./layout/Sidebar";
 import { Link } from "react-router-dom";
-import moment from 'moment'
+import moment from 'moment';
+import api  from   '../services/api'
 const axios = require("axios");
+
 var FormData = require("form-data");
 
 
@@ -149,7 +151,20 @@ class Dashboard extends React.Component {
     
             axios(config)
                 .then( res => {
-                    console.log(res)
+                   console.log(res.data)
+                   
+                   window.open(`http://localhost:5000/static/${res.data}`)
+
+                 /*   api.get(`/static/${res.data}`)
+                        .then(arq => {
+                            console.log(arq)
+                            var blob = new Blob([arq.data], {
+                                type: 'application/zip'
+                            })
+                            var url = window.URL.createObjectURL(blob)
+                            window.open(url)
+                        }) */
+                    
                 })
                 .catch(err => [
                     console.log(err)
