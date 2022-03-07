@@ -12,6 +12,7 @@
     "cpf-cnpj-validator": "^1.0.3",
     "form-data": "^4.0.0",
     "gerador-validador-cpf": "^5.0.2",
+    "moment": "^2.29.1",
     "mongoose": "^6.0.14",
     "qs": "^6.10.2",
     "react": "^16.14.0",

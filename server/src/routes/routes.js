@@ -67,7 +67,7 @@ routes.post("/api/delrippbank", verifyJWT, async (request, response) => {
 
 
 
-routes.post('/api/ripbankform', multer(multerConfig).array('files', 8), async (req, res) => {
+routes.post('/api/ripbankform',  async (req, res) => {
 
  
 
@@ -80,16 +80,16 @@ routes.post('/api/ripbankform', multer(multerConfig).array('files', 8), async (r
 
         let data = { ...req.body, isAdm: true, pass: hash };
 
-        data.file = req.files.map(file => {
-            return file.name
-        })
+       // data.file = req.files.map(file => {
+      //      return file.name
+        //})
 
         // criando path
-        const unico = req.body.cpf || req.body.cnpj;
-        const pathFinal = path.resolve(__dirname, "..", '..', "tmp", 'uploads', unico)
+      //  const unico = req.body.cpf || req.body.cnpj;
+       // const pathFinal = path.resolve(__dirname, "..", '..', "tmp", 'uploads', unico)
 
         // salvando path onde ficarão arquivos do usuario
-        data.destinoArquivos = pathFinal
+       // data.destinoArquivos = pathFinal
 
 
         rappibank.create(data, function (err, salvo) {

@@ -33,8 +33,11 @@ export default function Login({ setToken }) {
 
                 if (res.data.payload && res.data.token) {
 
+                    console.log(res.data.payload)
+
                     localStorage.setItem('payload', JSON.stringify(res.data.payload))
                     localStorage.setItem('token', JSON.stringify(res.data.token))
+                    localStorage.setItem('email',res.data.payload.email);
                     return navigate("/dashboard");
                 }
 
@@ -70,11 +73,11 @@ export default function Login({ setToken }) {
                             </div>
                             <form className="form" onSubmit={handleSubmit}>
                                 <div className="mb-3 ">
-                                    <label for="exampleFormControlInput1" className="form-label">Nome do usuário</label>
+                                    <label htmlFor="exampleFormControlInput1" className="form-label">Nome do usuário</label>
                                     <input type="email" className="form-control" id="exampleFormControlInput1" placeholder="Digite seu nome de usuário" onChange={e => setEmail(e.target.value)} />
                                 </div>
                                 <div className="mb-3 form-1">
-                                    <label for="exampleFormControlInput2" className="form-label">Senha</label>
+                                    <label htmlFor="exampleFormControlInput2" className="form-label">Senha</label>
                                     <div className="input-field">
                                         <input type="password" className="form-control" id="exampleFormControlInput2" placeholder="Digite sua senha" onChange={e => setPassword(e.target.value)} />
                                         <img src="images/pass-eye.svg" alt="" className="pass-eye" />
