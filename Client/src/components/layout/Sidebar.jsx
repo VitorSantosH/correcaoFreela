@@ -14,30 +14,33 @@ const Sidebar = (props) => {
                 <div className="menu-tittle">
                     <p>MENU PRINCIPAL</p>
                 </div>
-                <div className="menu-list">
+                <div className="menu-list" lang="pt-br" >
                     <ul>
                         <li className="active"><span><img src="images/user-icon.svg" alt="" /><a href="#">Cliente</a></span></li>
                         <li><button
+                            lang="pt-br"
                             style={{ 'backgroundColor': 'transparent', 'border': 'none' }}
-                            value='todo período' 
+                            value='todo período'
                             onClick={e => props.selectFiltro(e.target.value)}
-                            >
-                            
+                        >
+
                             Tudo
                         </button>
                         </li>
                         <li><button
+                            lang="pt-br"
                             style={{ 'backgroundColor': 'transparent', 'border': 'none' }}
-                            value="hoje" 
+                            value="hoje"
                             onClick={e => props.selectFiltro(e.target.value)}
-                            >
+                        >
                             Hoje
                         </button></li>
                         <li><button
+                            lang="pt-br"
                             style={{ 'backgroundColor': 'transparent', 'border': 'none' }}
                             value='esta semana'
                             onClick={e => props.selectFiltro(e.target.value)}
-                            >
+                        >
                             Esta semana
                         </button></li>
                     </ul>

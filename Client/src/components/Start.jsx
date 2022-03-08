@@ -71,7 +71,7 @@ class Start extends Component {
 
     let cMState = this.state;
     let emailRegex =
-      /(^[A-Za-z0-9.]+[@][a-zA-Z]{2,}[.]{1}[a-zA-Z]{3,}(([.]{1}[a-z]{2,})?)$)/;
+    /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;
 
     if (cMState.name === "") {
       this.setState(
@@ -138,7 +138,7 @@ class Start extends Component {
   handleChange = (input) => (e) => {
     let isError = { ...this.state.isError };
     let emailRegex =
-      /(^[A-Za-z0-9.]+[@][a-zA-Z]{2,10}[.]{1}[a-zA-Z]{2,5}(([.]{1}[a-z]{2,5})?)$)/;
+    /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;
     let namePattern = /(^[A-Za-z]{3,}[ ]{1}[A-Za-z]+)/;
     var pattern = new RegExp(
       /^(("[\w-\s]+")|([\w-]+(?:\.[\w-]+)*)|("[\w-\s]+")([\w-]+(?:\.[\w-]+)*))(@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$)|(@\[?((25[0-5]\.|2[0-4][0-9]\.|1[0-9]{2}\.|[0-9]{1,2}\.))((25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\.){2}(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\]?$)/i

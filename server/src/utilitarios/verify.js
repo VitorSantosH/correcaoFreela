@@ -4,11 +4,12 @@ const bcrypt = require("bcryptjs");
 
 function verifyJWT(req, res, next) { // Verifica token
 
-
+   
+    
+   
     const token = JSON.parse(req.headers.token); // converter de json para literal
 
-    console.log(token)
-    console.log(authSecret)
+   
 
     jwt.verify(token, authSecret, (err, decoded) => {
 

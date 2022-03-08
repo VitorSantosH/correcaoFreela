@@ -2,12 +2,12 @@ import React, { Component } from "react";
 import Sidebar from "./layout/Sidebar";
 import { Link } from "react-router-dom";
 import moment from 'moment';
-import api  from   '../services/api'
+import api from '../services/api'
 const axios = require("axios");
 
 var FormData = require("form-data");
 
-
+const token = localStorage.getItem('token');
 const ROWS_PER_PAGE = 4;
 
 class Dashboard extends React.Component {
@@ -60,26 +60,30 @@ class Dashboard extends React.Component {
             const sortedData = rippdata.sort(this.getSorting(orderBy, sortingKey));
             this.setState({ rippdata: sortedData });
         }
+
     }
 
     selectFiltro(value) {
+
+        console.log(value)
         this.setState({ filter: value })
         this.setState({
-            cadastrados: this.state.rippdata.map(item => {
+            cadastrados: this.state.rippdata.filter(item => {
 
                 if (value == 'todo período') {
                     return item
                 }
                 if (value == 'hoje') {
-                    if (moment(item.createdAt).format("D") == moment().format("D")
-                        && moment(item.createdAt).format("M") == moment().format("M")) {
+
+
+                    if (moment(item.createdAt).format("D") == moment().format("D") && moment(item.createdAt).format("M") == moment().format("M")) {
+
 
                         return item
                     }
                 }
                 if (value == 'esta semana') {
-                    console.log(moment(item.createdAt).format("W"))
-                    console.log(moment().format("W"))
+
                     if (moment(item.createdAt).format("W") == moment().format("W")
                         && moment(item.createdAt).format("M") == moment().format("M")) {
 
@@ -92,23 +96,20 @@ class Dashboard extends React.Component {
     }
 
     deleteentry(id) {
+
         let currentComponent = this;
-        var data = new FormData();
-        data.append("id", id);
 
-        var config = {
-            method: "post",
-            url: "http://localhost:5000/api/delrippbank/",
-            data: data,
-        };
 
-        axios(config)
-            .then(function (response) {
-                currentComponent.loaddata();
+        api.post('/api/delrippbank/', {
+            id: id
+        })
+            .then(res => {
+
             })
-            .catch(function (error) {
-                console.log(error);
-            });
+            .catch(err => {
+                console.log(err)
+            })
+
     }
     loaddata() {
         let currentComponent = this;
@@ -138,39 +139,51 @@ class Dashboard extends React.Component {
     changePage(page) {
         this.setState({ currentPage: page });
     }
-    donwloads(e){
+    CriarTd(data) {
+
+        if (data.cnpj != null && data.cnpj != undefined && data.cnpj != 'undefined') {
+            console.log('cnpj')
+            return <td>{ data.cnpj} </td>
+        }
+        if (data.cnpj == null || data.cnpj == undefined || data.cnpj == 'undefined') {
+            console.log("Pessoa")
+            return <td>Pessoa Física</td>
+        }
+        return <td></td>
+    }
+    donwloads(e) {
 
         this.state.cadastrados.map(item => {
 
-            const data = {...item}
+            const data = { ...item }
             var config = {
                 method: "post",
                 url: "http://localhost:5000/downloads/",
                 data: data,
             };
-    
-            axios(config)
-                .then( res => {
-                   console.log(res.data)
-                   
-                   window.open(`http://localhost:5000/static/${res.data}`)
 
-                 /*   api.get(`/static/${res.data}`)
-                        .then(arq => {
-                            console.log(arq)
-                            var blob = new Blob([arq.data], {
-                                type: 'application/zip'
-                            })
-                            var url = window.URL.createObjectURL(blob)
-                            window.open(url)
-                        }) */
-                    
+            axios(config)
+                .then(res => {
+
+
+                    window.open(`http://localhost:5000/static/${res.data}`)
+
+                    /*   api.get(`/static/${res.data}`)
+                           .then(arq => {
+                               console.log(arq)
+                               var blob = new Blob([arq.data], {
+                                   type: 'application/zip'
+                               })
+                               var url = window.URL.createObjectURL(blob)
+                               window.open(url)
+                           }) */
+
                 })
                 .catch(err => [
                     console.log(err)
                 ])
         })
-       
+
     }
 
     render() {
@@ -243,10 +256,9 @@ class Dashboard extends React.Component {
                             </span>
                             <ul >
                                 {this.state.cadastrados.map(cad => {
+
                                     if (cad) {
-                                        return <>
-                                            <li>{cad.name}</li>
-                                        </>
+                                        return <li> Nome: {cad.name}, E-mail: {cad.email} </li>
                                     }
                                 })}
                             </ul>
@@ -276,7 +288,7 @@ class Dashboard extends React.Component {
                                 </span>
                                 Download
                             </div>
-                          {/**
+                            {/**
                            *   <Link to="/card-app" className="btn">
                                 <span>
                                     <img src="images/add.svg" alt="" />
@@ -403,8 +415,8 @@ class Dashboard extends React.Component {
                                             />
                                         </span>
                                     </th>
-                                    <th>Empresa</th>
-                                    {/** <th>Score</th>  */}
+                                    {/**  <th>Empresa</th>
+                                     <th>Score</th>  */}
                                     <th>Ações</th>
                                 </tr>
                             </thead>
@@ -428,12 +440,13 @@ class Dashboard extends React.Component {
                                                         {new Date(data.createdAt).toDateString()}
                                                     </label>
                                                 </td>
-                                                <td>{data.cnpj}</td>
-                                                <td>{data.cpf}</td>
+                                                <this.CriarTd data />
+
+                                                <td>{'confidencial'}</td>
                                                 <td>{data.name}</td>
                                                 <td>{data.city}</td>
-                                                <td>{data.comptype}</td>
-                                                {/*data.crrestriction === "yes" ? (
+                                                {/* <td>{data.comptype}</td>
+                                                data.crrestriction === "yes" ? (
                           <td>
                             <span className="positivo">Positivo</span>
                           </td>

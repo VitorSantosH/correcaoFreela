@@ -10,7 +10,7 @@ const verifyJWT = require('../utilitarios/verify');
 const multerConfig = require('../utilitarios/multerConfig');
 const multer = require('multer');
 const path = require('path');
-const fsE = require('fs-extra');
+
 
 
 //const formidable = require('formidable')
@@ -20,12 +20,10 @@ const Zip2 = require('machinepack-zip-2');
 var rappibank = require('../schemas/rippbankSchema');
 
 // config upload 
-const upload = require("../../upload");
 const fs = require('fs')
 
 
 // Rotas
-
 routes.post("/api/checkemail", async (request, response) => {
     try {
         const donordata = await rappibank.find({ email: request.body.email });
@@ -37,13 +35,17 @@ routes.post("/api/checkemail", async (request, response) => {
 });
 
 
-routes.post("/api/delrippbank", verifyJWT, async (request, response) => {
-    try {
-        const donordata = await rappibank.remove({ email: request.body.email });
+routes.post("/api/delrippbank", verifyJWT, async (req, res) => {
+    
+    console.log(req.body)
 
-        response.status(201).json({ lengthdata: donordata });
+    try {
+        const donordata = await rappibank.deleteOne({ _id: req.body.id });
+
+        res.status(201).json({ lengthdata: donordata });
     } catch (error) {
-        response.status(400).json({ message: error });
+        console.log(error)
+        res.status(400).json({ message: error });
     }
 });
 
@@ -195,7 +197,7 @@ routes.get("/api/rippbank/:id", async (request, response) => {
 
 routes.get("/api/rippbank", async (request, response) => {
 
-    //console.log(request.headers.token)
+    
 
     try {
         const donordata = await rappibank.find({});
@@ -214,6 +216,8 @@ routes.get("/api/getInfo/:cnpj", async (request, response) => {
         response.status(404).json({ message: error.message });
     }
 });
+
+
 
 // rota de login
 routes.post('/login', (req, res) => {
@@ -289,6 +293,19 @@ routes.post('/downloads', (req, res) => {
             var erro = false
             var retorno
             console.log(user)
+
+            const unico = user.cpf || user.cnpj;
+            const pathTxt = path.resolve(__dirname, "..", '..', "tmp", 'uploads', unico, `${user.name}dados.txt`)
+            const dadosUser = ` Nome: ${user.name} \n E-mail: ${user.email} \n CPF: ${user.cpf} \n CNPJ: ${user.cnpj}`
+
+
+            fs.writeFileSync(pathTxt, dadosUser, err => {
+
+                if (err) return console.log(err)
+
+                return console.log('deu certo');
+            })
+
 
             Zip2.zip({
                 sources: [`${user.destinoArquivos}`],
