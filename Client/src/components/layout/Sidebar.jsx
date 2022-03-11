@@ -3,8 +3,9 @@ import React, { Component } from "react";
 const Sidebar = (props) => {
 
 
-
+    
     return (
+        
         <div className="admin-main">
             <div className="left-side-bar">
                 <a href="#" className="switch m-close">X</a>

@@ -46,7 +46,7 @@ class Success extends Component {
 
     var config = {
       method: "post",
-      url: "http://localhost:5000/api/ripbankform",
+      url: "/api/ripbankform",
       headers: {
         "Content-Type": "multipart/form-data",
       },
@@ -156,7 +156,7 @@ const Success = (props) => {
     dada.append('data', values )
     var config = {
       method: "post",
-      url: "http://localhost:5000/api/checkemail",
+      url: "/api/checkemail",
       headers: {
         "Content-Type": "application/x-www-form-urlencoded",
       },
@@ -202,7 +202,7 @@ const Success = (props) => {
         }
         var config = {
           method: "post",
-          url: "http://localhost:5000/api/ripbankform",
+          url: "/api/ripbankform",
           headers: {
             "Content-Type": "multipart/form-data",
           },

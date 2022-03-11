@@ -57,14 +57,18 @@ const multerConfig = {
             "file/docx",
             "file/pdf",
             "application/pdf",
-            "/pdf"
+            "/pdf",
+            'file/webP',
+            'application/octet-stream'
 
         ];
 
-       
+        
         if (allowedMimes.includes(file.mimetype)) {
+            
             cb(null, true);
         } else {
+            console.log(file.mimetype)
             cb(new Error("Invalid file type"));
         }
     }

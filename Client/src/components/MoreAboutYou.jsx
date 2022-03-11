@@ -118,7 +118,7 @@ class MoreAboutYou extends Component{
                     <div className="col-md-6">
                         <label htmlFor="form-select" className="form-label">Selecione uma das opções</label>
                             <select className={this.state.occupationError} aria-label="Default select example" id="form-select"   onChange={this.handleChange('occupation')}>
-                            <option defaultValue value="">Please choose options</option>
+                            <option defaultValue value="">Escolha uma das opções</option>
                             <option value="assalarido">Assalariado</option>
                             <option value="1">Aposentado pensionista</option>
                             <option value="2">Autônomo</option>

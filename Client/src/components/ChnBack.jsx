@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import ImageCapture from 'react-image-data-capture';
+import swal from 'sweetalert'
 class IdPicBackside extends Component {
 
     constructor(props) {
@@ -13,6 +14,10 @@ class IdPicBackside extends Component {
     }
     continue = e => {
         e.preventDefault();
+        if (this.state.src == "") {
+            swal('Erro!', "Por favor envie uma foto do documento!", "error")
+            return
+        }
         this.props.handleChange("filePicBackSide", this.state.image);
         this.props.nextStep();
     };
@@ -65,7 +70,7 @@ class IdPicBackside extends Component {
                                 </div>
                             </div>
                             <div className="col-md-6">
-                            <div className="file-wrapper">
+                                <div className="file-wrapper">
                                     <label>
                                         <img src="images/file-icon.svg" />
                                         <input type="file" name="file" size="60" accept="image/jpeg,image/png,application/pdf" onChange={this.ipFileHandler} />

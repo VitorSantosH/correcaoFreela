@@ -29,7 +29,7 @@ app.use(
   express.static("public"),
   serveIndex("public", { icons: true })
 );
-
+app.use('/', express.static('build'))
 app.use(routes);
 
 

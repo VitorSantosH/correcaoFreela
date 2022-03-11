@@ -17,12 +17,12 @@ class MoreAbout extends Component {
 
     callbackState = () => {
         let cState = this.state;
-        if (this.state.martials == 'married' && !cState.spouseInputError ) {
+        if (this.state.martials == 'married' && !cState.spouseInputError) {
             this.props.handleChange("martials", this.state.martials);
             this.props.handleChange("spouse", this.state.spouse);
             this.props.nextStep();
 
-        } else if (this.state.martials !== 'married'){
+        } else if (this.state.martials !== 'married') {
             this.props.handleChange("martials", this.state.martials);
             this.props.handleChange("spouse", this.state.spouse);
             this.props.nextStep();
@@ -33,22 +33,22 @@ class MoreAbout extends Component {
         let spousePattern = /(^[A-Za-z]{3,}[ ]{1}[A-Za-z]+)/;
 
         if (this.state.martials == 'married') {
-            if (!spousePattern.test(this.state.spouse)){
+            if (!spousePattern.test(this.state.spouse)) {
                 this.setState({ spouseFormError: "form-control error", spouseInputError: true }, () => this.callbackState())
-            } else if (spousePattern.test(this.state.spouse)){
+            } else if (spousePattern.test(this.state.spouse)) {
                 this.setState({ spouseFormError: "form-control", spouseInputError: false }, () => this.callbackState())
             }
-        } else if (this.state.martials !== 'married'){
+        } else if (this.state.martials !== 'married') {
             this.setState({ spouseFormError: "form-control", spouseInputError: false }, () => this.callbackState())
         }
     };
     componentDidMount() {
         const { values } = this.props;
         this.setState({ martials: values.martials });
-        this.setState({ spouse: values.spouse});
-        if(values.martials === 'married'){
-            this.setState({inputAllow: false})
-        } 
+        this.setState({ spouse: values.spouse });
+        if (values.martials === 'married') {
+            this.setState({ inputAllow: false })
+        }
     }
     back = e => {
         e.preventDefault();
@@ -72,8 +72,8 @@ class MoreAbout extends Component {
                 break;
             default:
                 break;
-        }       
-        
+        }
+
         this.setState({ [input]: e.target.value });
     }
 
@@ -88,7 +88,6 @@ class MoreAbout extends Component {
                         </div>
                     </div>
                 </header>
-
                 <section className="hero page-1-hero  page-3-hero">
                     <div className="container">
                         <form action="">
@@ -117,14 +116,19 @@ class MoreAbout extends Component {
                                         <option value="separated">Separado(a)</option>
                                     </select>
                                 </div>
-                                <div className="col-md-6">
 
-                                    <div className="form-inner form-margin">
-                                        <label htmlFor="exampleInputEmail1" className='form-label'>Nome do cônjuge</label>
-                                        <input type="text" className={this.state.spouseFormError} id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Escreva o nome do seu cônjuge" disabled={this.state.inputAllow} value={this.state.spouse} onChange={this.handleChange('spouse')} />
+                                {this.state.martials != "" && this.state.martials != "divorced" && this.state.martials != "widower" && this.state.martials != "separated" && this.state.martials != "single" && (
+                                    <div className="col-md-6">
+
+                                        <div className="form-inner form-margin">
+                                            <label htmlFor="exampleInputEmail1" className='form-label'>Nome do cônjuge</label>
+                                            <input type="text" className={this.state.spouseFormError} id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Escreva o nome do seu cônjuge" disabled={this.state.inputAllow} value={this.state.spouse} onChange={this.handleChange('spouse')} />
+                                        </div>
+
                                     </div>
+                                )}
 
-                                </div>
+
                                 <div className="col-md-12">
                                     <div className="page-1-hero-btn">
                                         <button className="btn" onClick={this.back}>VOLTAR</button>

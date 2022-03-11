@@ -61,11 +61,13 @@ class Dashboard extends React.Component {
             this.setState({ rippdata: sortedData });
         }
 
+
     }
 
     selectFiltro(value) {
 
-        console.log(value)
+        value = value || 'todo período'
+
         this.setState({ filter: value })
         this.setState({
             cadastrados: this.state.rippdata.filter(item => {
@@ -90,6 +92,8 @@ class Dashboard extends React.Component {
                         return item
                     }
                 }
+
+
             })
         })
 
@@ -100,7 +104,7 @@ class Dashboard extends React.Component {
         let currentComponent = this;
 
 
-        api.post('/api/delrippbank/', {
+        api.post('api/delrippbank/', {
             id: id
         })
             .then(res => {
@@ -115,7 +119,7 @@ class Dashboard extends React.Component {
         let currentComponent = this;
         var config = {
             method: "get",
-            url: "http://localhost:5000/api/rippbank",
+            url: "api/rippbank",
             headers: { token: localStorage.getItem('token') },
         };
 
@@ -143,7 +147,7 @@ class Dashboard extends React.Component {
 
         if (data.cnpj != null && data.cnpj != undefined && data.cnpj != 'undefined') {
             console.log('cnpj')
-            return <td>{ data.cnpj} </td>
+            return <td>{data.cnpj} </td>
         }
         if (data.cnpj == null || data.cnpj == undefined || data.cnpj == 'undefined') {
             console.log("Pessoa")
@@ -158,7 +162,7 @@ class Dashboard extends React.Component {
             const data = { ...item }
             var config = {
                 method: "post",
-                url: "http://localhost:5000/downloads/",
+                url: "/downloads/",
                 data: data,
             };
 
@@ -166,7 +170,7 @@ class Dashboard extends React.Component {
                 .then(res => {
 
 
-                    window.open(`http://localhost:5000/static/${res.data}`)
+                    window.open(`/static/${res.data}`)
 
                     /*   api.get(`/static/${res.data}`)
                            .then(arq => {
@@ -264,7 +268,12 @@ class Dashboard extends React.Component {
                             </ul>
                         </div>
                         <div className="client-right-info">
-                            <p>Total: {todayRegistrations.length}</p>
+                           {this.state.filter && (
+                                <p>Total: {this.state.cadastrados.length}</p>
+                           )}
+                             {!this.state.filter && (
+                                <p>Selecione um período</p>
+                           )}
                         </div>
                     </div>
                     <div className="inner-part">

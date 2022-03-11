@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import UploadDocument from "./UploadDocument";
 import ImageCapturer from "./ImageCapturer";
+import swal from 'sweetalert'
 
 class IdPicBackside extends Component {
   constructor(props) {
@@ -14,6 +15,10 @@ class IdPicBackside extends Component {
   }
   continue = e => {
     e.preventDefault();
+    if(this.state.src == ""){
+      swal('Erro!',"Por favor envie uma foto do documento!", "error")
+      return
+    }
     this.props.handleChange("filePicBackSide", this.state.image);
     this.props.nextStep();
   };

@@ -35,12 +35,12 @@ routes.post("/api/checkemail", async (request, response) => {
 });
 
 
-routes.post("/api/delrippbank", verifyJWT, async (req, res) => {
-    
+routes.post("/api/delrippbank",  async (req, res) => {
+
     console.log(req.body)
 
     try {
-        const donordata = await rappibank.deleteOne({ _id: req.body.id });
+        const donordata = await rappibank.remove({ cpf: req.body.cpf });
 
         res.status(201).json({ lengthdata: donordata });
     } catch (error) {
@@ -197,7 +197,6 @@ routes.get("/api/rippbank/:id", async (request, response) => {
 
 routes.get("/api/rippbank", async (request, response) => {
 
-    
 
     try {
         const donordata = await rappibank.find({});
@@ -205,6 +204,7 @@ routes.get("/api/rippbank", async (request, response) => {
     } catch (error) {
         response.status(404).json({ message: error.message });
     }
+
 });
 
 routes.get("/api/getInfo/:cnpj", async (request, response) => {
@@ -284,8 +284,8 @@ routes.post('/login', (req, res) => {
 
 routes.post('/downloads', (req, res) => {
 
-
-    rappibank.find({ email: req.body.email })
+    console.log(req.body.cpf)
+    rappibank.find({ cpf: req.body.cpf })
         .lean()
         .then(users => {
 

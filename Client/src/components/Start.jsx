@@ -2,6 +2,10 @@ import React, { Component } from "react";
 import { cpf } from "cpf-cnpj-validator";
 import NumberFormat from "react-number-format";
 
+var emailRegex =
+/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;
+
+
 class Start extends Component {
   constructor(props) {
     super(props);
@@ -38,7 +42,36 @@ class Start extends Component {
     this.setState({ dob: values.dob });
     this.setState({ cell: values.cell });
     this.setState({ email: values.email });
+
+
   }
+
+  componentDidUpdate() {
+
+  }
+
+  setEmail() {
+
+    var emailRegex =
+      /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;
+
+
+    if (emailRegex.test(this.state.email)) {
+      console.log('aqui')
+      this.setState(
+        { emailError: "form-control", emailInputError: false }
+      )
+    } else {
+      console.log('teste')
+      this.setState(
+        { emailError: "form-control error", emailInputError: true },
+
+      );
+
+    }
+  }
+
+ 
 
   callbackState = () => {
     let cState = this.state;
@@ -71,7 +104,7 @@ class Start extends Component {
 
     let cMState = this.state;
     let emailRegex =
-    /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;
+      /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;
 
     if (cMState.name === "") {
       this.setState(
@@ -136,20 +169,25 @@ class Start extends Component {
   };
   // Handle fields change
   handleChange = (input) => (e) => {
+    console.log("www")
     let isError = { ...this.state.isError };
     let emailRegex =
-    /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;
+      /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;
     let namePattern = /(^[A-Za-z]{3,}[ ]{1}[A-Za-z]+)/;
     var pattern = new RegExp(
       /^(("[\w-\s]+")|([\w-]+(?:\.[\w-]+)*)|("[\w-\s]+")([\w-]+(?:\.[\w-]+)*))(@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$)|(@\[?((25[0-5]\.|2[0-4][0-9]\.|1[0-9]{2}\.|[0-9]{1,2}\.))((25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\.){2}(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\]?$)/i
     );
     switch (input) {
       case "email":
+        console.log(this.state.email)
+        console.log(emailRegex.test(this.state.email))
+
         if (emailRegex.test(this.state.email)) {
+          console.log('aqui')
           this.setState(
             { emailError: "form-control", emailInputError: false },
             () => null
-          );
+          )
         } else {
           this.setState(
             { emailError: "form-control error", emailInputError: true },
@@ -259,9 +297,9 @@ class Start extends Component {
                         const { formattedValue, value } = values;
                         !cpf.isValid(value)
                           ? this.setState({
-                              cpfValid: false,
-                              cpfLabel: "This CPF is invalid",
-                            })
+                            cpfValid: false,
+                            cpfLabel: "Por favor digite um CPF válido",
+                          })
                           : this.setState({ cpfValid: true, cpfLabel: "CPF" });
                         isError.cpf = !cpf.isValid(value)
                           ? "Enter Valid CPF"
@@ -314,19 +352,19 @@ class Start extends Component {
                         );
                         !cellPattern.test(value)
                           ? this.setState(
-                              {
-                                cellError: "form-control error",
-                                cellInputError: true,
-                              },
-                              () => null
-                            )
+                            {
+                              cellError: "form-control error",
+                              cellInputError: true,
+                            },
+                            () => null
+                          )
                           : this.setState(
-                              {
-                                cellError: "form-control",
-                                cellInputError: false,
-                              },
-                              () => null
-                            );
+                            {
+                              cellError: "form-control",
+                              cellInputError: false,
+                            },
+                            () => null
+                          );
                         this.setState({ cell: formattedValue });
                       }}
                     />
@@ -344,7 +382,22 @@ class Start extends Component {
                       aria-describedby="emailHelp"
                       placeholder="Escreva seu e-mail"
                       value={this.state.email}
-                      onChange={this.handleChange("email")}
+                      onChange={e => {
+                        this.setState({ email: e.target.value })
+                        this.setEmail();
+                        let quantidade = 0
+                        if(!emailRegex.test(this.setState.email)){
+                         let interval = setInterval(() => {
+                            this.setEmail()
+                            quantidade++ 
+                            
+                            if (quantidade == 2) {
+                              clearInterval(interval);
+                            }
+                            
+                          },2000)
+                        }
+                      }}
                       required
                     />
 

@@ -9,11 +9,20 @@ export default function Login({ setToken }) {
     const navigate = useNavigate();
     const [email, setEmail] = useState();
     const [password, setPassword] = useState();
+    const [typeInput, setTypeInput] = useState("password")
     const data = {
         email,
         pass: password
     }
 
+
+    const changeType = () => {
+        if(typeInput == 'password'){
+           return  setTypeInput('text')
+        } else {
+          return   setTypeInput('password')
+        }
+    }
 
     const handleSubmit = async e => {
         e.preventDefault();
@@ -79,8 +88,8 @@ export default function Login({ setToken }) {
                                 <div className="mb-3 form-1">
                                     <label htmlFor="exampleFormControlInput2" className="form-label">Senha</label>
                                     <div className="input-field">
-                                        <input type="password" className="form-control" id="exampleFormControlInput2" placeholder="Digite sua senha" onChange={e => setPassword(e.target.value)} />
-                                        <img src="images/pass-eye.svg" alt="" className="pass-eye" />
+                                        <input type={typeInput} className="form-control" id="exampleFormControlInput2" placeholder="Digite sua senha" onChange={e => setPassword(e.target.value)} />
+                                        <img src="images/pass-eye.svg" onClick={e => changeType()} alt="" className="pass-eye" />
                                     </div>
                                 </div>
                                 <div classNameName='form-btn'>

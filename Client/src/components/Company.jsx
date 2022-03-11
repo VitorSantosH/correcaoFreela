@@ -58,9 +58,9 @@ class Company extends Component {
         })
         .catch((error) => {
           this.setState({
-            nameFetchError: "Cannot get name. Please try Again !",
+            nameFetchError: "Não é possível obter o nome. Por favor, tente novamente!",
           });
-          console.error("There was an error!", error);
+          console.error("Houve um erro!", error);
         });
   };
 
@@ -226,7 +226,7 @@ class Company extends Component {
             {
               nameError: "form-control error",
               nameInputError: true,
-              nameLabel: "Please write full name",
+              nameLabel: "Por favor escreva o nome completo",
             },
             () => null
           );
@@ -312,7 +312,7 @@ class Company extends Component {
                       onValueChange={(values) => {
                         const { formattedValue, value } = values;
                         isError.cpf = !cpf.isValid(value)
-                          ? "Enter Valid CPF"
+                          ? "Digite um cpf válido"
                           : "";
                         this.setState({ cpf: formattedValue });
                       }}
@@ -369,7 +369,7 @@ class Company extends Component {
                         // Fetch name if valid cnpj entered
                         if (cnpj.isValid(value)) this.getNameByCNPJ(value);
                         isError.cpnj = !cnpj.isValid(value)
-                          ? "Enter Valid CPNJ"
+                          ? "Digite um CPF válido"
                           : "";
                         this.setState({ cpnj: formattedValue });
                       }}

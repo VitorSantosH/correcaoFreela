@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import ImageCapture from 'react-image-data-capture';
+import swal from 'sweetalert';
 class ChnBack extends Component {
 
     constructor(props) {
@@ -17,6 +18,10 @@ class ChnBack extends Component {
     }
     continue = e => {
         e.preventDefault();
+        if(this.state.src == ""){
+            swal('Erro!',"Por favor envie uma foto do documento!", "error")
+            return
+          }
         this.props.handleChange("fileIdPic", this.state.image);
         this.props.nextStep();
     };

@@ -1,5 +1,8 @@
 import React, { Component } from "react";
 import ImageCapture from "react-image-data-capture";
+import UploadDocument from "./UploadDocument";
+import { isMobile } from "react-device-detect";
+import swal from 'sweetalert'
 
 class Selfie extends Component {
   constructor(props) {
@@ -13,6 +16,11 @@ class Selfie extends Component {
   }
   continue = (e) => {
     e.preventDefault();
+
+    if(this.state.src == ""){
+      swal('Erro!',"Por favor envie uma selfie!", "error")
+      return
+    }
     this.props.handleChange("file", this.state.image);
     this.props.nextStep();
   };
@@ -27,14 +35,20 @@ class Selfie extends Component {
   onCapture = (imageData) => {
     // read as webP
     this.setState({ src: imageData.webP });
-    // read as file
 
+    // read as file
     let file = new File([imageData.blob], new Date().getTime() + ".png");
     this.setState({ image: file });
     this.setState({ capture: false });
   };
   onError = (error) => {
     console.log(error);
+  };
+  handleCaptureImage = (file, source) => {
+    this.setState({
+      src: source,
+      image: file,
+    });
   };
 
   render() {
@@ -72,37 +86,47 @@ class Selfie extends Component {
                   <div className="panel">
                     {this.state.src ? (
                       <></>
-                    ) : (
-                      <img
-                        src="images/camera-icon.svg"
-                        id="switchFrontBtn"
-                        onClick={this.takeselfie}
-                      />
-                    )}
-                    {this.state.show ? (
-                      this.state.capture ? (
-                        <div className="">
-                          {" "}
-                          <ImageCapture
-                            onCapture={this.onCapture}
-                            onError={this.onError}
-                            width={300}
-                            userMediaConfig={{ video: true }}
-                          />
-                        </div>
-                      ) : (
-                        <></>
+                    ) : isMobile ? <img
+                      src="images/camera-icon.svg"
+                      id="switchFrontBtn"
+                      onClick={this.takeselfie}
+                    /> : <></>}
+                    {isMobile &&
+                      this.state.show && (
+                        this.state.capture && (
+                          <div className="">
+                            {" "}
+                            <ImageCapture
+                              onCapture={this.onCapture}
+                              onError={this.onError}
+                              width={300}
+                              userMediaConfig={{ video: true }}
+                            />
+                          </div>
+                        )
                       )
-                    ) : (
-                      <></>
-                    )}
-                    {this.state.src ? (
+                    }
+                    {!isMobile &&
+                      (
+                        <UploadDocument
+                          imgSrc={this.state.src}
+                          handleCaptureImage={this.handleCaptureImage}
+                        />
+
+                      )
+                    }
+
+                    {/**
+                     * 
+                     * {this.state.src ? (
                       <div className="">
                         <img src={this.state.src} alt="captured-img" />
                       </div>
                     ) : (
                       <></>
                     )}
+                     * 
+                     */}
                   </div>
                   <div className="vdo-holder">
                     <video id="cam" autoPlay muted playsInline>

@@ -1,6 +1,7 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 
-import { Link } from 'react-router-dom'
+
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 const responsive = {
@@ -45,16 +46,16 @@ class Home extends Component{
                         <a className="nav-link active" aria-current="page" href="#">Casa</a>
                         </li>
                         <li className="nav-item">
-                        <a className="nav-link" href="#">Sobre nós</a>
+                        <a className="nav-link" href="/#sobreNos">Sobre nós</a>
                         </li>  
                         <li className="nav-item">
-                        <a className="nav-link" href="#">Recursos</a>
+                        <a className="nav-link" href="/#servicos">Recursos</a>
                         </li> 
                         <li className="nav-item">
-                        <a className="nav-link" href="#">Sócios</a>
+                        <a className="nav-link" href="/#parceiros">Sócios</a>
                         </li>  
                         <li className="nav-item">
-                        <a className="nav-link" href="#">RappiCard</a>
+                        <a className="nav-link" href="/#cardPrime">RappiCard</a>
                         </li>
                     </ul>
                     </div>
@@ -104,7 +105,7 @@ class Home extends Component{
                         <figure><img src="images/rapi-card-main.png" alt=""/></figure>
                     </div>
                     <div className="prime">
-                        <h3>Prime</h3>
+                        <h3 id="cardPrime" >Prime</h3>
                     </div>
                 </div>
                 </div>
@@ -133,7 +134,7 @@ class Home extends Component{
             <div className="row">
                 <div className="col-md-12">
                     <div className="nossos-top-text">
-                        <h2>Nossos serviços</h2>
+                        <h2 id="servicos">Nossos serviços</h2>
                         <p>Temos os melhores serviços para a melhor segurança do seu banco digital com RappiCard</p>
                     </div>
                 </div>
@@ -340,7 +341,7 @@ class Home extends Component{
                         <div className="row">
                             <div className="col-md-12">
                                 <div className="parceiros-top">
-                                    <h2>Parceiros de lançamento</h2>
+                                    <h2 id="parceiros">Parceiros de lançamento</h2>
                                 </div>
                             </div>
                             <div className="col-md-12">
@@ -400,7 +401,7 @@ class Home extends Component{
                 <div className="row">
                     <div className="col-md-12">
                 <div className="vedio-sec-top">
-                    <h2>O seu Rappicard em 28 minutos!</h2>
+                    <h2 id="sobreNos" >O seu Rappicard em 28 minutos!</h2>
                     <p>Rappicard: Muito diferente, muito cashback e rápido, pode chegar em até 28 minutos.</p>
                     <img src="images/rappi-shape-2.svg" alt="" className="shape-2"/>
                 </div>
@@ -454,7 +455,7 @@ class Home extends Component{
                             <div className="footer-list">
                                 <ul>
                                     <li><a href="#">RappiCard</a></li>
-                                    <li><a href="/login">Entrar</a></li>
+                                    <li><Link to={'/login'} > Entrar </Link>  </li>
                                     <li><a href="#">Registro</a></li>
                                 </ul>
                             </div>

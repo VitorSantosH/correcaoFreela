@@ -5,6 +5,7 @@ function UploadDocument({ imgSrc, handleCaptureImage, toggle }) {
   const handleImageUpload = e => {
     const { files } = e.target;
     handleCaptureImage(files[0], files[0].name);
+    console.log(isMobile)
   };
 
   return (

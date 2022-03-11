@@ -28,6 +28,7 @@
     "react-scripts": "^3.0.1",
     "react-swipe": "^6.0.4",
     "react-webcam": "^6.0.0",
+    "sweetalert": "^2.1.2",
     "swipe-js-iso": "^2.1.5"
   },
   "scripts": {
