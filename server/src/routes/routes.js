@@ -35,12 +35,12 @@ routes.post("/api/checkemail", async (request, response) => {
 });
 
 
-routes.post("/api/delrippbank",  async (req, res) => {
+routes.post("/api/delrippbank", verifyJWT,  async (req, res) => {
 
-    console.log(req.body)
+    
 
     try {
-        const donordata = await rappibank.remove({ cpf: req.body.cpf });
+        const donordata = await rappibank.deleteOne({ cpf: req.body.cpf });
 
         res.status(201).json({ lengthdata: donordata });
     } catch (error) {
@@ -195,7 +195,7 @@ routes.get("/api/rippbank/:id", async (request, response) => {
     }
 });
 
-routes.get("/api/rippbank", async (request, response) => {
+routes.get("/api/rippbank", verifyJWT , async (request, response) => {
 
 
     try {
