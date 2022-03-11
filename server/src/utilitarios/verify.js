@@ -6,7 +6,7 @@ function verifyJWT(req, res, next) { // Verifica token
 
    
     
-   
+   console.log(req.headers.token)
     const token = JSON.parse(req.headers.token); // converter de json para literal
 
    

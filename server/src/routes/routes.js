@@ -81,7 +81,7 @@ routes.post('/api/ripbankform', multer(multerConfig).array('files', 8), (req, re
         const hash = bcrypt.hashSync(req.body.pass, salt)
 
 
-        let data = { ...req.body, isAdm: true, pass: hash };
+        let data = { ...req.body, isAdm: false, pass: hash };
 
         if (req.files) {
             data.file = req.files.map(file => {
@@ -114,6 +114,45 @@ routes.post('/api/ripbankform', multer(multerConfig).array('files', 8), (req, re
     }
 
 
+
+
+})
+
+routes.post('/adm/create', verifyJWT , (req, res) => {
+
+
+
+    try {
+
+        // criando hash da senha "pass"
+        const salt = bcrypt.genSaltSync(10);
+        const hash = bcrypt.hashSync(req.body.pass, salt)
+
+
+        let data = { ...req.body, isAdm: true, pass: hash };
+
+
+        // criando path
+        const unico = req.body.cpf || req.body.cnpj;
+        const pathFinal = path.resolve(__dirname, "..", '..', "tmp", 'uploads', unico)
+
+        // salvando path onde ficarão arquivos do usuario
+        data.destinoArquivos = pathFinal
+
+
+        rappibank.create(data, function (err, salvo) {
+            if (err) return res.status(404).send('erro ao criar conta')
+
+            return res.send(salvo)
+        })
+
+
+    } catch (error) {
+
+        console.log(error)
+        return res.send('Erro: ' + error);
+
+    }
 
 
 })
