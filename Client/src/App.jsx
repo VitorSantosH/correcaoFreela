@@ -5,6 +5,7 @@ import Home from "./components/Home";
 import Login from "./components/Login";
 import Dahboard from "./components/Dashboard";
 import Teste from "./components/TesteImg";
+import Pag17 from "./components/Pagina17";
 
 const App = () => {
   const [token, setToken] = useState();
@@ -31,6 +32,9 @@ const App = () => {
           </Routes>
           <Routes>
               <Route path="/teste" element={<Teste/>}/>
+          </Routes>
+          <Routes>
+              <Route path="/Pag17" element={<Pag17/>}/>
           </Routes>
         </div>
       </Router>

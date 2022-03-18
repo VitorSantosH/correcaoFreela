@@ -18,6 +18,9 @@ import CreatePass from "./CreatePass";
 import ChnBack from "./ChnBack";
 import ChnFront from "./ChnFront";
 import { withRouter } from "react-router-dom";
+
+import Pag17 from "./Pagina17";
+
 const axios = require("axios");
 
 export class UserForm extends Component {
@@ -67,7 +70,7 @@ export class UserForm extends Component {
   nextStep = (ans) => {
     const { step } = this.state;
     this.forceUpdate();
-
+    console.log(step)
     setTimeout(() => {
       if (ans) {
         this.setState({
@@ -136,6 +139,7 @@ export class UserForm extends Component {
         });
     }
   }
+
   // Go back to prev step
   prevStep = (num) => {
     const { step } = this.state;
@@ -337,16 +341,16 @@ export class UserForm extends Component {
         );
       case 10:
         return (
-          <IdPic
+          <Pag17
             nextStep={this.nextStep}
             prevStep={this.prevStep}
             handleChange={this.handleChange}
             values={values}
           />
-        );
+        )
       case 11:
         return (
-          <IdPicBackSide
+          <IdPic
             nextStep={this.nextStep}
             prevStep={this.prevStep}
             handleChange={this.handleChange}
@@ -355,7 +359,7 @@ export class UserForm extends Component {
         );
       case 12:
         return (
-          <IncomeProof
+          <IdPicBackSide
             nextStep={this.nextStep}
             prevStep={this.prevStep}
             handleChange={this.handleChange}
@@ -363,6 +367,15 @@ export class UserForm extends Component {
           />
         );
       case 13:
+        return (
+          <IncomeProof
+            nextStep={this.nextStep}
+            prevStep={this.prevStep}
+            handleChange={this.handleChange}
+            values={values}
+          />
+        );
+      case 14:
         if (this.state.comptype == "yes") {
           return (
             <SocialContract
@@ -382,7 +395,7 @@ export class UserForm extends Component {
             />
           );
         }
-      case 14:
+      case 15:
         return (
           <Success
             nextStep={this.nextStep}
@@ -391,7 +404,7 @@ export class UserForm extends Component {
             values={values}
           />
         );
-      case 15:
+      case 16:
         return (
           <CompanyNegative
             nextStep={this.nextStep}

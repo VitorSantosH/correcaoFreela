@@ -46,7 +46,9 @@ function UploadDocument({ imgSrc, handleCaptureImage, toggle }) {
               size="60"
               accept="image/jpeg,image/png,application/pdf"
               onChange={handleImageUpload}
+              style={{'display': "none"}}
             />
+      
             <div className="inner-text">
               <p>
                 <span className="d-md-block d-none">

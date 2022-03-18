@@ -101,8 +101,7 @@ class Success extends Component {
                     </figure>
                   </div>
                   <p>
-                    Em breve você vai receber um e-mail com o resultado da nossa
-                    análise.
+                  Em breve você receberá um e-mail com o resultado da nossa análise. Mas não se preoucupe esse processo é bem rápido ,tá?
                   </p>
                 </div>
               </div>

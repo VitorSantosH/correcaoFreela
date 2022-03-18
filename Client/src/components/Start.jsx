@@ -214,7 +214,7 @@ class Start extends Component {
             {
               nameError: "form-control error",
               nameInputError: true,
-              nameLabel: "Please write full name",
+              nameLabel: "Por favor digite o nome completo",
             },
             () => null
           );
