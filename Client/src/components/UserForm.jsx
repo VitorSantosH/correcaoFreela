@@ -332,21 +332,22 @@ export class UserForm extends Component {
         );
       case 9:
         return (
-          <DocumentType
-            nextStep={this.nextStep}
-            prevStep={this.prevStep}
-            handleChange={this.handleChange}
-            values={values}
-          />
-        );
-      case 10:
-        return (
           <Pag17
             nextStep={this.nextStep}
             prevStep={this.prevStep}
             handleChange={this.handleChange}
             values={values}
           />
+        
+        );
+      case 10:
+        return (
+          <DocumentType
+          nextStep={this.nextStep}
+          prevStep={this.prevStep}
+          handleChange={this.handleChange}
+          values={values}
+        />
         )
       case 11:
         return (

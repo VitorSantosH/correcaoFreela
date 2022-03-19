@@ -109,11 +109,11 @@ class Company extends Component {
     if (this.formValid(this.state)) {
       Object.keys(this.state).map((key) => {
         if (this.state[key] === "" && key === "email") {
-          isError.email = "Email Required";
+          isError.email = "Email necessário";
         } else if (this.state[key] === "" && key === "cpf") {
-          isError.cpf = "cpf Required";
+          isError.cpf = "cpf necessário";
         } else if (this.state[key] === "" && key === "cpnj") {
-          isError.cpnj = "CPNJ Required";
+          isError.cpnj = "CPNJ necessário";
         } else if (
           this.state["email"] !== "" &&
           this.state["cpf"] !== "" &&
@@ -208,7 +208,7 @@ class Company extends Component {
     switch (input) {
       case "email":
         isError.email = !pattern.test(this.state.email)
-          ? "Email address is invalid"
+          ? "Email iválido"
           : "";
         break;
       case "name":
