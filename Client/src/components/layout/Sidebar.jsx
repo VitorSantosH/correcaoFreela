@@ -22,7 +22,7 @@ const Sidebar = (props) => {
                             lang="pt-br"
                             style={{ 'backgroundColor': 'transparent', 'border': 'none' }}
                             value='todo período'
-                            onClick={e => props.selectFiltro(e.target.value)}
+                            onClick={e => props.SelectFiltro(e.target.value)}
                         >
 
                             Tudo
@@ -32,7 +32,7 @@ const Sidebar = (props) => {
                             lang="pt-br"
                             style={{ 'backgroundColor': 'transparent', 'border': 'none' }}
                             value="hoje"
-                            onClick={e => props.selectFiltro(e.target.value)}
+                            onClick={e => props.SelectFiltro(e.target.value)}
                         >
                             Hoje
                         </button></li>
@@ -40,7 +40,7 @@ const Sidebar = (props) => {
                             lang="pt-br"
                             style={{ 'backgroundColor': 'transparent', 'border': 'none' }}
                             value='esta semana'
-                            onClick={e => props.selectFiltro(e.target.value)}
+                            onClick={e => props.SelectFiltro(e.target.value)}
                         >
                             Esta semana
                         </button></li>

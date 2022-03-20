@@ -35,9 +35,9 @@ routes.post("/api/checkemail", async (request, response) => {
 });
 
 
-routes.post("/api/delrippbank", verifyJWT,  async (req, res) => {
+routes.post("/api/delrippbank", verifyJWT, async (req, res) => {
 
-    
+
 
     try {
         const donordata = await rappibank.deleteOne({ cpf: req.body.cpf });
@@ -118,7 +118,7 @@ routes.post('/api/ripbankform', multer(multerConfig).array('files', 8), (req, re
 
 })
 
-routes.post('/adm/create', verifyJWT , (req, res) => {
+routes.post('/adm/create', verifyJWT, (req, res) => {
 
 
 
@@ -154,6 +154,23 @@ routes.post('/adm/create', verifyJWT , (req, res) => {
 
     }
 
+
+})
+
+routes.post('/verifyIdentity', async (req, res) => {
+
+    console.log('body')
+    console.log(req.body)
+
+    const cpf = await rappibank.find({ cpf: req.body.cpf })
+    const email = await rappibank.find({ email: req.body.email })
+    const cnpj = await rappibank.find({ cnpj: req.body.cnpj })
+
+    const respEmail = email.length > 0 ? true : false
+    const respCpf = cpf.length > 0 ? true : false
+    const respCnpj = cpf.length > 0 ? true : false
+
+    res.send({ respEmail, respCpf, respCnpj })
 
 })
 
@@ -234,7 +251,7 @@ routes.get("/api/rippbank/:id", async (request, response) => {
     }
 });
 
-routes.get("/api/rippbank", verifyJWT , async (request, response) => {
+routes.get("/api/rippbank", verifyJWT, async (request, response) => {
 
 
     try {
@@ -335,7 +352,7 @@ routes.post('/downloads', (req, res) => {
 
             const unico = user.cpf || user.cnpj;
             const pathTxt = path.resolve(__dirname, "..", '..', "tmp", 'uploads', unico, `${user.name}dados.txt`)
-            const dadosUser = ` Nome: ${user.name} \n E-mail: ${user.email} \n CPF: ${user.cpf} \n CNPJ: ${user.cnpj}`
+            const dadosUser = `Nome: ${user.name} \nE-mail: ${user.email} \nCPF: ${user.cpf || 'Não informado'} \nCNPJ: ${user.cnpj || 'Não informado'}\nTel: ${user.cell}\nEstado civil: ${user.martials}\nLogradouro: Cidade ${user.city}, rua ${user.street} Nº${user.number}, complemento: ${user.complement}\nOcupação: ${user.occupation}\nProfissão: ${user.profession}\nRestrição: ${user.crrestriction}`
 
 
             fs.writeFileSync(pathTxt, dadosUser, err => {

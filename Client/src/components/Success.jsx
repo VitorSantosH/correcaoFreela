@@ -1,7 +1,13 @@
 import React, { Component } from "react";
+import api from '../services/api.jsx'
 const axios = require("axios");
+
 var FormData = require("form-data");
 var qs = require("qs");
+
+
+
+
 class Success extends Component {
   componentDidMount() {
 
@@ -46,12 +52,14 @@ class Success extends Component {
 
     var config = {
       method: "post",
-      url: "/api/ripbankform",
+      url: "http://localhost:5000/api/ripbankform",
       headers: {
         "Content-Type": "multipart/form-data",
       },
       data: data,
     };
+
+    console.log(api.baseURL)
 
     axios(config)
       .then(function (response) {

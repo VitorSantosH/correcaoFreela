@@ -22,6 +22,7 @@ class Dashboard extends React.Component {
             currentPage: 1,
             cadastrados: [],
             filter: null,
+            checkado: [],
         };
     }
 
@@ -50,7 +51,24 @@ class Dashboard extends React.Component {
 
     componentDidMount() {
         this.loaddata();
+    }
 
+    checar(value) {
+        this.setState({ checkado: this.state.checkado.concat(value) })
+
+    }
+
+    removerLista(value) {
+
+        const novorray = this.state.checkado.filter((item, index) => {
+            if (item != value) {
+                return item
+            } else {
+                return false
+            }
+        })
+
+        this.setState({ checkado: novorray })
     }
 
     componentDidUpdate(prevProps, prevState) {
@@ -62,11 +80,17 @@ class Dashboard extends React.Component {
         }
 
 
+
     }
 
-    selectFiltro(value) {
+
+
+    SelectFiltro(value) {
+
 
         value = value || 'todo período'
+
+
 
         this.setState({ filter: value })
         this.setState({
@@ -99,6 +123,7 @@ class Dashboard extends React.Component {
 
     }
 
+
     deleteentry(id) {
 
         let currentComponent = this;
@@ -115,15 +140,16 @@ class Dashboard extends React.Component {
             })
 
     }
-    loaddata() {
+
+    async loaddata() {
         let currentComponent = this;
         var config = {
             method: "get",
-            url: "api/rippbank",
+            url: "http://localhost:5000/api/rippbank",
             headers: { token: localStorage.getItem('token') },
         };
 
-        axios(config)
+        const data = await axios(config)
             .then(function (response) {
                 const { sortingKey, orderBy } = currentComponent.state;
                 currentComponent.setState({ rippdata: response.data });
@@ -134,10 +160,13 @@ class Dashboard extends React.Component {
                     this.getSorting(orderBy, sortingKey)
                 );
                 this.setState({ rippdata: sortedData });
+
             })
             .catch(function (error) {
                 console.log(error);
             });
+
+        this.SelectFiltro(data)
     }
 
     changePage(page) {
@@ -146,18 +175,34 @@ class Dashboard extends React.Component {
     CriarTd(data) {
 
         if (data.cnpj != null && data.cnpj != undefined && data.cnpj != 'undefined') {
-            console.log('cnpj')
             return <td>{data.cnpj} </td>
         }
         if (data.cnpj == null || data.cnpj == undefined || data.cnpj == 'undefined') {
-            console.log("Pessoa")
             return <td>Pessoa Física</td>
         }
         return <td></td>
     }
+
     donwloads(e) {
 
         this.state.cadastrados.map(item => {
+
+            console.log(item)
+
+            if (item.cpf != undefined && item.cpf != "" && item.cpf != false && item.cnpj != null && item.cpf != "undefined") {
+                console.log(item.cpf)
+                if (!this.state.checkado.includes(item.cpf)) {
+                    console.log('não checado')
+                    return
+                }
+            }
+
+            if (item.cnpj != undefined && item.cnpj != "" && item.cnpj != false && item.cnpj != null && item.cnpj != "undefined") {
+                console.log(item.cnpj)
+                if (!this.state.checkado.includes(item.cnpj)) {
+                    return
+                }
+            }
 
             const data = { ...item }
             var config = {
@@ -236,7 +281,7 @@ class Dashboard extends React.Component {
 
         return (
             <section className="admin-panel">
-                <Sidebar selectFiltro={this.selectFiltro.bind(this)} />
+                <Sidebar SelectFiltro={this.SelectFiltro.bind(this)} />
                 <div className="right-part">
                     <a href="#" className="switch m-open">
                         <img src="images/menu.svg" alt="" />
@@ -268,12 +313,12 @@ class Dashboard extends React.Component {
                             </ul>
                         </div>
                         <div className="client-right-info">
-                           {this.state.filter && (
+                            {this.state.filter && (
                                 <p>Total: {this.state.cadastrados.length}</p>
-                           )}
-                             {!this.state.filter && (
+                            )}
+                            {!this.state.filter && (
                                 <p>Selecione um período</p>
-                           )}
+                            )}
                         </div>
                     </div>
                     <div className="inner-part">
@@ -430,17 +475,27 @@ class Dashboard extends React.Component {
                                 </tr>
                             </thead>
                             <tbody>
-                                {filteredRecords.map((data, index) => {
 
-                                    if (data && filteredRecords.indexOf(data) === index) {
+
+                                {this.state.cadastrados.map((data, index) => {
+
+                                    if (data && this.state.cadastrados.indexOf(data) === index) {
                                         return (
                                             <tr key={index}>
                                                 <td>
                                                     <input
                                                         className="form-check-input"
                                                         type="checkbox"
-                                                        value=""
+                                                        value={data.cpf || data.cnpj}
                                                         id="flexCheckChecked-1"
+                                                        onChange={e => {
+
+                                                            if (e.target.checked) {
+                                                                return this.checar(e.target.value)
+                                                            } else {
+                                                                return this.removerLista(e.target.value)
+                                                            }
+                                                        }}
                                                     />
                                                     <label
                                                         className="form-check-label"
@@ -451,7 +506,7 @@ class Dashboard extends React.Component {
                                                 </td>
                                                 <this.CriarTd data />
 
-                                                <td>{'confidencial'}</td>
+                                                <td>{data.cpf || data.cnpj}</td>
                                                 <td>{data.name}</td>
                                                 <td>{data.city}</td>
                                                 {/* <td>{data.comptype}</td>

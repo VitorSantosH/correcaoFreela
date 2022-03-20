@@ -1,6 +1,9 @@
 import React, { Component } from "react";
 import { cpf } from "cpf-cnpj-validator";
 import NumberFormat from "react-number-format";
+import api from '../services/api.jsx';
+import swal from 'sweetalert';
+
 
 var emailRegex =
 /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;
@@ -47,6 +50,35 @@ class Start extends Component {
   }
 
   componentDidUpdate() {
+
+  }
+  testMail(e) {
+    
+    e.preventDefault()
+    
+    
+    api.post('/verifyIdentity', {
+      email: this.state.email,
+      cpf: this.state.cpf
+    })
+      .then(res => {
+
+        if(res.data.respEmail){         
+          swal('Erro!',"Este e-mail já esta em uso!", "error")         
+        }
+
+        if(res.data.respCpf){         
+          swal('Erro!',"Este cpf já esta em uso!", "error")         
+        }
+
+        if(!res.data.respCpf && !res.data.respEmail){
+          this.continue(e)
+        }
+
+      })
+      .catch(err => {
+        console.log(err)
+      })
 
   }
 
@@ -302,7 +334,7 @@ class Start extends Component {
                           })
                           : this.setState({ cpfValid: true, cpfLabel: "CPF" });
                         isError.cpf = !cpf.isValid(value)
-                          ? "Enter Valid CPF"
+                          ? "Digite um cpf válido"
                           : "";
                         this.setState({ cpf: formattedValue });
                       }}
@@ -413,7 +445,7 @@ class Start extends Component {
                     <button className="btn" onClick={this.back}>
                       VOLTAR
                     </button>
-                    <button className="btn" onClick={this.continue}>
+                    <button className="btn" onClick={e =>  this.testMail(e)}>
                       PRÓXIMO{" "}
                       <span>
                         <img src="images/double-arrow.svg" alt="" />

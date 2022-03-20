@@ -1,0 +1,17 @@
+ Nome:  
+ 
+                                E-mail: carlos@gmail.com 
+
+                                CPF: 308.338.518-88 
+
+                                CNPJ: undefined
+ 
+                                Tel: +55 (11) 98102-4044
+
+                                Estado civil: 
+
+                                Logradouro: Cidade Santos, rua Avenida Presidente Wilson Nº123, complemento: 123
+
+                                Ocupação: 1
+
+                                Profissão: medico
