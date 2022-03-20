@@ -1,4 +1,10 @@
- Nome:  
- E-mail: teste@gmail.com 
- CPF: 669.754.820-71 
- CNPJ: undefined
+Nome:  
+E-mail: teste@gmail.com 
+CPF: 669.754.820-71 
+CNPJ: undefined
+Tel: +55 (31) 99640-0879
+Estado civil: 
+Logradouro: Cidade Contagem, rua Rua Alvimar Carneiro Nº98798798, complemento: 
+Ocupação: assalarido
+Profissão: wewe
+Restrição: no

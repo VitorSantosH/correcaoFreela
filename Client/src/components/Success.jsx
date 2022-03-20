@@ -60,7 +60,7 @@ class Success extends Component {
     };
 
     console.log(api.baseURL)
-
+    console.log('Success')
     axios(config)
       .then(function (response) {
         

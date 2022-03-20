@@ -1,4 +1,10 @@
- Nome:  
- E-mail: teste2@mail.com 
- CPF: 994.358.790-39 
- CNPJ: undefined
+Nome:  
+E-mail: teste2@mail.com 
+CPF: 994.358.790-39 
+CNPJ: undefined
+Tel: +55 (31) 99640-0879
+Estado civil: 
+Logradouro: Cidade Contagem, rua Rua Alvimar Carneiro Nº21111, complemento: 
+Ocupação: assalarido
+Profissão: ettet
+Restrição: no

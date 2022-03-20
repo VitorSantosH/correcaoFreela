@@ -23,7 +23,8 @@ class Dashboard extends React.Component {
             cadastrados: [],
             filter: null,
             checkado: [],
-            paginaNumber: 0
+            paginaNumber: 0,
+            checked: false
         };
     }
 
@@ -84,7 +85,67 @@ class Dashboard extends React.Component {
 
     }
 
+  
+    deleteentry(data) {
 
+        let currentComponent = this;
+
+
+        api.post('/api/delrippbank/', {
+            ...data
+        })
+            .then(res => {
+                this.loaddata();
+            })
+            .catch(err => {
+                console.log(err)
+            })
+
+    }
+
+    async loaddata() {
+        let currentComponent = this;
+        var config = {
+            method: "get",
+            url: "/api/rippbank",
+            headers: { token: localStorage.getItem('token') },
+        };
+
+        const data = await axios(config)
+            .then(function (response) {
+                const { sortingKey, orderBy } = currentComponent.state;
+                currentComponent.setState({ rippdata: response.data });
+                // const pageCount = Math.ceil(response.data.length / ROWS_PER_PAGE);
+
+                currentComponent.setState({ pagesCount: response.data.length < 10 ? 1 : Math.ceil(response.data.length / 10) + 1 });
+
+                const sortedData = response.data.sort(
+                    this.getSorting(orderBy, sortingKey)
+                );
+                this.setState({ rippdata: sortedData });
+
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+
+        this.SelectFiltro(data)
+
+    }
+
+    changePage(page) {
+        this.setState({ currentPage: page });
+    }
+    CriarTd(data) {
+
+        if (data.cnpj != null && data.cnpj != undefined && data.cnpj != 'undefined') {
+            return <td>{data.cnpj} </td>
+        }
+        if (data.cnpj == null || data.cnpj == undefined || data.cnpj == 'undefined') {
+            return <td>Pessoa Física</td>
+        }
+        return <td></td>
+    }
 
     SelectFiltro(value) {
 
@@ -92,7 +153,7 @@ class Dashboard extends React.Component {
         value = value || 'todo período'
 
 
-        const temp  = this.state.rippdata.filter(item => {
+        const temp = this.state.rippdata.filter(item => {
 
             if (value == 'todo período') {
                 return item
@@ -127,114 +188,76 @@ class Dashboard extends React.Component {
     }
 
 
-    deleteentry(id) {
+    PaginarTabela() {
 
-        let currentComponent = this;
+        const tabela = this.state.cadastrados.map((data, index) => {
 
 
-        api.post('api/delrippbank/', {
-            id: id
-        })
-            .then(res => {
 
-            })
-            .catch(err => {
-                console.log(err)
-            })
 
-    }
-
-    async loaddata() {
-        let currentComponent = this;
-        var config = {
-            method: "get",
-            url: "/api/rippbank",
-            headers: { token: localStorage.getItem('token') },
-        };
-
-        const data = await axios(config)
-            .then(function (response) {
-                const { sortingKey, orderBy } = currentComponent.state;
-                currentComponent.setState({ rippdata: response.data });
-                // const pageCount = Math.ceil(response.data.length / ROWS_PER_PAGE);
+            if (index >= this.state.paginaNumber && index <= this.state.paginaNumber + 9) {
                 
-                currentComponent.setState({ pagesCount: response.data.length < 10 ? 1 : Math.ceil(response.data.length / 10) + 1 });
-
-                const sortedData = response.data.sort(
-                    this.getSorting(orderBy, sortingKey)
-                );
-                this.setState({ rippdata: sortedData });
-
-            })
-            .catch(function (error) {
-                console.log(error);
-            });
-
-        this.SelectFiltro(data)
-        
-    }
-
-    changePage(page) {
-        this.setState({ currentPage: page });
-    }
-    CriarTd(data) {
-
-        if (data.cnpj != null && data.cnpj != undefined && data.cnpj != 'undefined') {
-            return <td>{data.cnpj} </td>
-        }
-        if (data.cnpj == null || data.cnpj == undefined || data.cnpj == 'undefined') {
-            return <td>Pessoa Física</td>
-        }
-        return <td></td>
-    }
-
-    PaginarTabela(){
-        
-      const tabela =  this.state.cadastrados.map((data, index) => {
-
-            if(index >= this.state.paginaNumber && index <= this.state.paginaNumber + 9  ){
-                //data && this.state.cadastrados.indexOf(data) === index
-                if (1) {
+                if (data && this.state.cadastrados.indexOf(data) === index) {
 
                     return (
                         <tr key={index}>
                             <td>
-                                <input
-                                    className="form-check-input"
-                                    type="checkbox"
-                                    value={data.cpf || data.cnpj}
-                                    id="flexCheckChecked-1"
-                                    onChange={e => {
-    
-                                        if (e.target.checked) {
-                                            return this.checar(e.target.value)
-                                        } else {
-                                            return this.removerLista(e.target.value)
-                                        }
-                                    }}
-                                />
+
+                                {this.state.checked && (
+                                    <input
+                                        className="form-check-input"
+                                        type="checkbox"
+                                        value={data.cpf || data.cnpj}
+                                        id="flexCheckChecked-1"
+                                        checked
+                                        onChange={e => {
+                                            if (e.target.checked) {
+                                                return this.checar(e.target.value)
+                                            } else {
+                                                return this.removerLista(e.target.value)
+                                            }
+                                        }}
+                                    />
+                                )}
+
+                                {!this.state.checked && (
+                                    <input
+                                        className="form-check-input"
+                                        type="checkbox"
+                                        value={data.cpf || data.cnpj}
+                                        id="flexCheckChecked-1"
+                                        onChange={e => {
+                                            if (e.target.checked) {
+                                                return this.checar(e.target.value)
+                                            } else {
+                                                return this.removerLista(e.target.value)
+                                            }
+                                        }}
+                                    />
+                                )}
+
                                 <label
                                     className="form-check-label"
                                     htmlFor="flexCheckChecked-1"
                                 >
-                                    {new Date(data.createdAt).toDateString()}
+                                    {new Date(data.createdAt).toLocaleDateString('pt-BR')}
                                 </label>
                             </td>
                             <this.CriarTd data />
-    
+
                             <td>{data.cpf || data.cnpj}</td>
                             <td>{data.name}</td>
                             <td>{data.city}</td>
                             <td>
                                 <ul>
                                     <li>
-    
+
                                     </li>
                                     <li>
                                         <a
                                             href="#"
                                             email={data.email}
-                                            onClick={() => this.deleteentry(data._id)}
+                                            onClick={() => this.deleteentry(data)}
                                         >
                                             <img src="images/delete.svg" alt="" />
                                         </a>
@@ -249,36 +272,42 @@ class Dashboard extends React.Component {
                         </tr>
                     );
                 }
-    
+
             }
         })
 
-        
+
 
         return tabela
-        
 
+
+    }
+
+    selecionarTodos() {
+
+        this.setState({cadastrados: this.state.cadastrados})
     }
 
     donwloads(e) {
 
+
+      
+
         this.state.cadastrados.map(item => {
 
-            console.log(item)
+           
 
-            if (item.cpf != undefined && item.cpf != "" && item.cpf != false && item.cnpj != null && item.cpf != "undefined") {
-                console.log(item.cpf)
-                if (!this.state.checkado.includes(item.cpf)) {
-                    console.log('não checado')
-                    return
-                }
+            if(!item.cnpj || !item.cpf){
+                return
             }
 
-            if (item.cnpj != undefined && item.cnpj != "" && item.cnpj != false && item.cnpj != null && item.cnpj != "undefined") {
-                console.log(item.cnpj)
-                if (!this.state.checkado.includes(item.cnpj)) {
-                    return
-                }
+         
+
+            if(this.state.checked ||  this.state.checkado.includes(item.cpf) || this.state.checkado.includes(item.cnpj)){
+
+            } else {
+
+                return 
             }
 
             const data = { ...item }
@@ -444,6 +473,18 @@ class Dashboard extends React.Component {
                                             type="checkbox"
                                             value=""
                                             id="flexCheckChecked"
+
+                                            onChange={e => {
+
+                                                if (e.target.checked) {
+                                                    this.selecionarTodos();
+                                                    return this.setState({checked : true})
+
+                                                } else {
+                                                    this.SelectFiltro();
+                                                    return this.setState({checked : false})
+                                                }
+                                            }}
                                         />
                                         <label
                                             className="form-check-label"
@@ -557,7 +598,7 @@ class Dashboard extends React.Component {
                                 </tr>
                             </thead>
                             <tbody>
-                                     {this.PaginarTabela()}
+                                {this.PaginarTabela()}
                             </tbody>
                         </table>
                     </div>
@@ -576,8 +617,8 @@ class Dashboard extends React.Component {
                                         href="#"
                                         onClick={() => {
                                             if (currentPage !== 1) this.changePage(currentPage - 1);
-                                            if(this.state.paginaNumber - 1 >= 0  ){
-                                                this.setState({paginaNumber : this.state.paginaNumber - 9})
+                                            if (this.state.paginaNumber - 1 >= 0) {
+                                                this.setState({ paginaNumber: this.state.paginaNumber - 9 })
                                             }
                                         }}
                                     >
@@ -608,16 +649,16 @@ class Dashboard extends React.Component {
                                         onClick={() => {
                                             if (currentPage < pagesCount) this.changePage(currentPage + 1);
 
-                                            
 
-                                           var increment =   this.state.paginaNumber + 9  >= this.state.cadastrados.length ?  ( this.state.paginaNumber - this.state.cadastrados.length) : 9
-                                            if(increment < 0 ) increment = 0
-                                            
-                                            if(this.state.cadastrados.length >= this.state.paginaNumber  ){
-                                                this.setState({paginaNumber : this.state.paginaNumber + increment })
+
+                                            var increment = this.state.paginaNumber + 9 >= this.state.cadastrados.length ? (this.state.paginaNumber - this.state.cadastrados.length) : 9
+                                            if (increment < 0) increment = 0
+
+                                            if (this.state.cadastrados.length >= this.state.paginaNumber) {
+                                                this.setState({ paginaNumber: this.state.paginaNumber + increment })
                                             }
-                                           
-                                            
+
+
                                         }}
                                     >
                                         Próximo

@@ -6,7 +6,7 @@ import swal from 'sweetalert';
 
 
 var emailRegex =
-/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;
+  /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;
 
 
 class Start extends Component {
@@ -52,26 +52,26 @@ class Start extends Component {
   componentDidUpdate() {
 
   }
+
   testMail(e) {
-    
-    e.preventDefault()
-    
-    
+
+
+
     api.post('/verifyIdentity', {
       email: this.state.email,
       cpf: this.state.cpf
     })
       .then(res => {
 
-        if(res.data.respEmail){         
-          swal('Erro!',"Este e-mail já esta em uso!", "error")         
+        if (res.data.respEmail) {
+          swal('Erro!', "Este e-mail já esta em uso!", "error")
         }
 
-        if(res.data.respCpf){         
-          swal('Erro!',"Este cpf já esta em uso!", "error")         
+        if (res.data.respCpf) {
+          swal('Erro!', "Este cpf já esta em uso!", "error")
         }
 
-        if(!res.data.respCpf && !res.data.respEmail){
+        if (!res.data.respCpf && !res.data.respEmail) {
           this.continue(e)
         }
 
@@ -103,7 +103,7 @@ class Start extends Component {
     }
   }
 
- 
+
 
   callbackState = () => {
     let cState = this.state;
@@ -121,6 +121,7 @@ class Start extends Component {
       this.props.handleChange("email", this.state.email);
       this.props.handleChange("corpname", this.state.corpname);
       this.props.handleChange("legalrep", this.state.legalrep);
+      this.props.handleChange("name", this.state.name);
       if (this.state.dob.length == 10) {
         let year = cState.dob.substring(0, 4);
         if (year && Number(year) > 2003) {
@@ -131,8 +132,41 @@ class Start extends Component {
       }
     }
   };
-  continue = (e) => {
+  continue = async (e) => {
     e.preventDefault();
+
+    console.log(this.state)
+
+    const err = await api.post('http://localhost:5000/verifyIdentity', {
+      email: this.state.email,
+      cpf: this.state.cpf
+    })
+      .then(res => {
+
+
+
+        if (res.data.respEmail) {
+          swal('Erro!', "Este e-mail já esta em uso!", "error")
+          return true
+        }
+
+        if (res.data.respCpf) {
+          swal('Erro!', "Este cpf já esta em uso!", "error")
+          return true
+        }
+
+        /**
+         * if(!res.data.respCpf && !res.data.respEmail){
+          this.continue(e)
+        }
+         */
+
+      })
+      .catch(err => {
+        console.log(err)
+      })
+
+    if (err) return
 
     let cMState = this.state;
     let emailRegex =
@@ -418,16 +452,16 @@ class Start extends Component {
                         this.setState({ email: e.target.value })
                         this.setEmail();
                         let quantidade = 0
-                        if(!emailRegex.test(this.setState.email)){
-                         let interval = setInterval(() => {
+                        if (!emailRegex.test(this.setState.email)) {
+                          let interval = setInterval(() => {
                             this.setEmail()
-                            quantidade++ 
-                            
+                            quantidade++
+
                             if (quantidade == 2) {
                               clearInterval(interval);
                             }
-                            
-                          },2000)
+
+                          }, 2000)
                         }
                       }}
                       required
@@ -445,7 +479,7 @@ class Start extends Component {
                     <button className="btn" onClick={this.back}>
                       VOLTAR
                     </button>
-                    <button className="btn" onClick={e =>  this.testMail(e)}>
+                    <button className="btn" onClick={e => this.continue(e)}>
                       PRÓXIMO{" "}
                       <span>
                         <img src="images/double-arrow.svg" alt="" />

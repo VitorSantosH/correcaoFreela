@@ -1,0 +1,10 @@
+Nome: teste final? 
+E-mail: teste@yahoo 
+CPF: 800.050.950-42 
+CNPJ: undefined
+Tel: +55 (31) 99634-0087
+Estado civil: 
+Logradouro: Cidade Contagem, rua Rua General Clark Nº250, complemento: 
+Ocupação: assalarido
+Profissão: teste
+Restrição: no

@@ -351,7 +351,7 @@ routes.post('/downloads', (req, res) => {
             console.log(user)
 
             const unico = user.cpf || user.cnpj;
-            const pathTxt = path.resolve(__dirname, "..", '..', "tmp", 'uploads', unico, `${user.name}dados.txt`)
+            const pathTxt = path.resolve(__dirname, "..", '..', "tmp", 'uploads', unico, `dados.txt`)
             const dadosUser = `Nome: ${user.name} \nE-mail: ${user.email} \nCPF: ${user.cpf || 'Não informado'} \nCNPJ: ${user.cnpj || 'Não informado'}\nTel: ${user.cell}\nEstado civil: ${user.martials}\nLogradouro: Cidade ${user.city}, rua ${user.street} Nº${user.number}, complemento: ${user.complement}\nOcupação: ${user.occupation}\nProfissão: ${user.profession}\nRestrição: ${user.crrestriction}`
 
 

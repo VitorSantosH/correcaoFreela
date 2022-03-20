@@ -1,0 +1,10 @@
+Nome:  
+E-mail: Testemail@gmail.com 
+CPF: 002.770.650-89 
+CNPJ: undefined
+Tel: +55 (31) 99640-0879
+Estado civil: 
+Logradouro: Cidade Contagem, rua Rua Alvimar Carneiro Nº1251, complemento: 
+Ocupação: assalarido
+Profissão: qualquer
+Restrição: no
