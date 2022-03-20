@@ -1,0 +1,30 @@
+<svg width="850" height="1080" viewBox="0 0 850 1080" fill="none" xmlns="http://www.w3.org/2000/svg">
+<rect width="850" height="1080" fill="#222733"/>
+<g style="mix-blend-mode:multiply" opacity="0.2">
+<circle cx="515.5" cy="87.5" r="68.5" fill="#191DCC"/>
+</g>
+<g style="mix-blend-mode:multiply" opacity="0.1">
+<circle cx="62.5" cy="241.5" r="32.5" fill="#191DCC"/>
+</g>
+<g style="mix-blend-mode:multiply" opacity="0.2">
+<circle cx="44" cy="887" r="44" fill="#2F318B"/>
+</g>
+<g style="mix-blend-mode:multiply" opacity="0.4">
+<path d="M495.116 360.576L493.961 447.17L419.545 402.872L495.116 360.576Z" fill="url(#paint0_linear_179_1747)"/>
+</g>
+<g style="mix-blend-mode:multiply" opacity="0.2">
+<path d="M525.997 789.494L465.604 774.606L508.694 729.748L525.997 789.494Z" fill="#191DCC"/>
+</g>
+<g style="mix-blend-mode:multiply" opacity="0.4">
+<path d="M359.027 832.345L489.884 883.014L415.927 960.615L359.027 832.345Z" fill="#191DCC"/>
+</g>
+<g style="mix-blend-mode:multiply" opacity="0.2">
+<line x1="168.97" y1="870.172" x2="304.172" y2="732.03" stroke="#191DCC" stroke-width="4" stroke-linecap="round" stroke-dasharray="8 8"/>
+</g>
+<defs>
+<linearGradient id="paint0_linear_179_1747" x1="495.116" y1="360.576" x2="443.965" y2="446.503" gradientUnits="userSpaceOnUse">
+<stop stop-color="#191DCC"/>
+<stop offset="1" stop-color="#191DCC" stop-opacity="0"/>
+</linearGradient>
+</defs>
+</svg>
