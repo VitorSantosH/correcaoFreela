@@ -52,7 +52,7 @@ class Success extends Component {
 
     var config = {
       method: "post",
-      url: "http://localhost:5000/api/ripbankform",
+      url: "/api/ripbankform",
       headers: {
         "Content-Type": "multipart/form-data",
       },

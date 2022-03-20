@@ -2,7 +2,18 @@ import React, { Component } from "react";
 
 const Sidebar = (props) => {
 
+    
 
+    const filtrar = (filter, value) => {
+
+
+        if(filter == value ){
+            
+            return "#ff333b"
+        }else {
+            return "#212529"
+        }
+    }
     
     return (
         
@@ -20,7 +31,7 @@ const Sidebar = (props) => {
                         <li className="active"><span><img src="images/user-icon.svg" alt="" /><a href="#">Cliente</a></span></li>
                         <li><button
                             lang="pt-br"
-                            style={{ 'backgroundColor': 'transparent', 'border': 'none' }}
+                            style={{ 'backgroundColor': 'transparent', 'border': 'none', "color": filtrar(props.filter,'todo período' ) }}
                             value='todo período'
                             onClick={e => props.SelectFiltro(e.target.value)}
                         >
@@ -30,7 +41,7 @@ const Sidebar = (props) => {
                         </li>
                         <li><button
                             lang="pt-br"
-                            style={{ 'backgroundColor': 'transparent', 'border': 'none' }}
+                            style={{ 'backgroundColor': 'transparent', 'border': 'none', "color": filtrar(props.filter,"hoje" ) }}
                             value="hoje"
                             onClick={e => props.SelectFiltro(e.target.value)}
                         >
@@ -38,7 +49,7 @@ const Sidebar = (props) => {
                         </button></li>
                         <li><button
                             lang="pt-br"
-                            style={{ 'backgroundColor': 'transparent', 'border': 'none' }}
+                            style={{ 'backgroundColor': 'transparent', 'border': 'none', "color": filtrar(props.filter,'esta semana' ) }}
                             value='esta semana'
                             onClick={e => props.SelectFiltro(e.target.value)}
                         >

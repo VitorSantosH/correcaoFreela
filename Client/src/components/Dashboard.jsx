@@ -23,6 +23,7 @@ class Dashboard extends React.Component {
             cadastrados: [],
             filter: null,
             checkado: [],
+            paginaNumber: 0
         };
     }
 
@@ -91,34 +92,36 @@ class Dashboard extends React.Component {
         value = value || 'todo período'
 
 
+        const temp  = this.state.rippdata.filter(item => {
+
+            if (value == 'todo período') {
+                return item
+            }
+            if (value == 'hoje') {
+
+
+                if (moment(item.createdAt).format("D") == moment().format("D") && moment(item.createdAt).format("M") == moment().format("M")) {
+
+
+                    return item
+                }
+            }
+            if (value == 'esta semana') {
+
+                if (moment(item.createdAt).format("W") == moment().format("W")
+                    && moment(item.createdAt).format("M") == moment().format("M")) {
+
+                    return item
+                }
+            }
+
+
+        })
+
 
         this.setState({ filter: value })
         this.setState({
-            cadastrados: this.state.rippdata.filter(item => {
-
-                if (value == 'todo período') {
-                    return item
-                }
-                if (value == 'hoje') {
-
-
-                    if (moment(item.createdAt).format("D") == moment().format("D") && moment(item.createdAt).format("M") == moment().format("M")) {
-
-
-                        return item
-                    }
-                }
-                if (value == 'esta semana') {
-
-                    if (moment(item.createdAt).format("W") == moment().format("W")
-                        && moment(item.createdAt).format("M") == moment().format("M")) {
-
-                        return item
-                    }
-                }
-
-
-            })
+            cadastrados: temp
         })
 
     }
@@ -145,7 +148,7 @@ class Dashboard extends React.Component {
         let currentComponent = this;
         var config = {
             method: "get",
-            url: "http://localhost:5000/api/rippbank",
+            url: "/api/rippbank",
             headers: { token: localStorage.getItem('token') },
         };
 
@@ -153,8 +156,9 @@ class Dashboard extends React.Component {
             .then(function (response) {
                 const { sortingKey, orderBy } = currentComponent.state;
                 currentComponent.setState({ rippdata: response.data });
-                const pageCount = Math.ceil(response.data.length / ROWS_PER_PAGE);
-                currentComponent.setState({ pagesCount: pageCount });
+                // const pageCount = Math.ceil(response.data.length / ROWS_PER_PAGE);
+                
+                currentComponent.setState({ pagesCount: response.data.length < 10 ? 1 : Math.ceil(response.data.length / 10) + 1 });
 
                 const sortedData = response.data.sort(
                     this.getSorting(orderBy, sortingKey)
@@ -167,6 +171,7 @@ class Dashboard extends React.Component {
             });
 
         this.SelectFiltro(data)
+        
     }
 
     changePage(page) {
@@ -181,6 +186,78 @@ class Dashboard extends React.Component {
             return <td>Pessoa Física</td>
         }
         return <td></td>
+    }
+
+    PaginarTabela(){
+        
+      const tabela =  this.state.cadastrados.map((data, index) => {
+
+            if(index >= this.state.paginaNumber && index <= this.state.paginaNumber + 9  ){
+                //data && this.state.cadastrados.indexOf(data) === index
+                if (1) {
+
+                    return (
+                        <tr key={index}>
+                            <td>
+                                <input
+                                    className="form-check-input"
+                                    type="checkbox"
+                                    value={data.cpf || data.cnpj}
+                                    id="flexCheckChecked-1"
+                                    onChange={e => {
+    
+                                        if (e.target.checked) {
+                                            return this.checar(e.target.value)
+                                        } else {
+                                            return this.removerLista(e.target.value)
+                                        }
+                                    }}
+                                />
+                                <label
+                                    className="form-check-label"
+                                    htmlFor="flexCheckChecked-1"
+                                >
+                                    {new Date(data.createdAt).toDateString()}
+                                </label>
+                            </td>
+                            <this.CriarTd data />
+    
+                            <td>{data.cpf || data.cnpj}</td>
+                            <td>{data.name}</td>
+                            <td>{data.city}</td>
+                            <td>
+                                <ul>
+                                    <li>
+    
+                                    </li>
+                                    <li>
+                                        <a
+                                            href="#"
+                                            email={data.email}
+                                            onClick={() => this.deleteentry(data._id)}
+                                        >
+                                            <img src="images/delete.svg" alt="" />
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <Link to={"/card-app/" + data._id}>
+                                            <img src="images/edit.svg" alt="" />
+                                        </Link>
+                                    </li>
+                                </ul>
+                            </td>
+                        </tr>
+                    );
+                }
+    
+            }
+        })
+
+        
+
+        return tabela
+        
+
     }
 
     donwloads(e) {
@@ -207,7 +284,7 @@ class Dashboard extends React.Component {
             const data = { ...item }
             var config = {
                 method: "post",
-                url: "/downloads/",
+                url: `/downloads/`,
                 data: data,
             };
 
@@ -280,9 +357,9 @@ class Dashboard extends React.Component {
 
 
         return (
-            <section className="admin-panel">
-                <Sidebar SelectFiltro={this.SelectFiltro.bind(this)} />
-                <div className="right-part">
+            <section className="admin-panel" style={{ 'minHeight': "100vh" }}>
+                <Sidebar SelectFiltro={this.SelectFiltro.bind(this)} filter={this.state.filter} />
+                <div className="right-part" style={{ 'minHeight': "100vh" }}>
                     <a href="#" className="switch m-open">
                         <img src="images/menu.svg" alt="" />
                     </a>
@@ -295,7 +372,9 @@ class Dashboard extends React.Component {
                             <h1>RappiBanks/Cliente</h1>
                         </div>
                     </div>
-                    <div className="client-total">
+                    {/**
+                     * 
+                     * <div className="client-total">
                         <div className="client-left-info">
                             <span>
                                 <img src="images/arrow-top.svg" alt="" />
@@ -321,6 +400,9 @@ class Dashboard extends React.Component {
                             )}
                         </div>
                     </div>
+                     * 
+                     * 
+                     */}
                     <div className="inner-part">
                         <div className="input-group mb-3">
                             <input
@@ -475,77 +557,7 @@ class Dashboard extends React.Component {
                                 </tr>
                             </thead>
                             <tbody>
-
-
-                                {this.state.cadastrados.map((data, index) => {
-
-                                    if (data && this.state.cadastrados.indexOf(data) === index) {
-                                        return (
-                                            <tr key={index}>
-                                                <td>
-                                                    <input
-                                                        className="form-check-input"
-                                                        type="checkbox"
-                                                        value={data.cpf || data.cnpj}
-                                                        id="flexCheckChecked-1"
-                                                        onChange={e => {
-
-                                                            if (e.target.checked) {
-                                                                return this.checar(e.target.value)
-                                                            } else {
-                                                                return this.removerLista(e.target.value)
-                                                            }
-                                                        }}
-                                                    />
-                                                    <label
-                                                        className="form-check-label"
-                                                        htmlFor="flexCheckChecked-1"
-                                                    >
-                                                        {new Date(data.createdAt).toDateString()}
-                                                    </label>
-                                                </td>
-                                                <this.CriarTd data />
-
-                                                <td>{data.cpf || data.cnpj}</td>
-                                                <td>{data.name}</td>
-                                                <td>{data.city}</td>
-                                                {/* <td>{data.comptype}</td>
-                                                data.crrestriction === "yes" ? (
-                          <td>
-                            <span className="positivo">Positivo</span>
-                          </td>
-                        ) : (
-                          <td>
-                            <span className="negativo">Negativo</span>
-                          </td>
-                        )*/}
-
-                                                <td>
-                                                    <ul>
-                                                        <li>
-
-                                                        </li>
-                                                        <li>
-                                                            <a
-                                                                href="#"
-                                                                email={data.email}
-                                                                onClick={() => this.deleteentry(data._id)}
-                                                            >
-                                                                <img src="images/delete.svg" alt="" />
-                                                            </a>
-                                                        </li>
-                                                        <li>
-                                                            <Link to={"/card-app/" + data._id}>
-                                                                <img src="images/edit.svg" alt="" />
-                                                            </Link>
-                                                        </li>
-                                                    </ul>
-                                                </td>
-                                            </tr>
-                                        );
-                                    }
-
-                                })}
+                                     {this.PaginarTabela()}
                             </tbody>
                         </table>
                     </div>
@@ -564,6 +576,9 @@ class Dashboard extends React.Component {
                                         href="#"
                                         onClick={() => {
                                             if (currentPage !== 1) this.changePage(currentPage - 1);
+                                            if(this.state.paginaNumber - 1 >= 0  ){
+                                                this.setState({paginaNumber : this.state.paginaNumber - 9})
+                                            }
                                         }}
                                     >
                                         Anterior
@@ -591,8 +606,18 @@ class Dashboard extends React.Component {
                                         className="page-link btn"
                                         href="#"
                                         onClick={() => {
-                                            if (currentPage < pagesCount)
-                                                this.changePage(currentPage + 1);
+                                            if (currentPage < pagesCount) this.changePage(currentPage + 1);
+
+                                            
+
+                                           var increment =   this.state.paginaNumber + 9  >= this.state.cadastrados.length ?  ( this.state.paginaNumber - this.state.cadastrados.length) : 9
+                                            if(increment < 0 ) increment = 0
+                                            
+                                            if(this.state.cadastrados.length >= this.state.paginaNumber  ){
+                                                this.setState({paginaNumber : this.state.paginaNumber + increment })
+                                            }
+                                           
+                                            
                                         }}
                                     >
                                         Próximo
