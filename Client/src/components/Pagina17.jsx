@@ -56,40 +56,40 @@ class Pag17 extends Component {
         return (
             <React.Fragment>
 
-                <header class="page-1-header">
-                    <div class="container">
-                        <div class="page-1-brand">
+                <header className="page-1-header">
+                    <div className="container">
+                        <div className="page-1-brand">
                             <a href="#"><img src="images/brand.png" alt="" /></a>
                         </div>
                     </div>
                 </header>
 
-                <section class="hero page-1-hero  page-3-hero page-4-hero page-5-hero page-6-hero page-7-hero page-8-hero page-9-hero page-10-hero  page-11-hero page-12-hero page-17-hero">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="page-1-hero-progress">
+                <section className="hero page-1-hero  page-3-hero page-4-hero page-5-hero page-6-hero page-7-hero page-8-hero page-9-hero page-10-hero  page-11-hero page-12-hero page-17-hero">
+                    <div className="container">
+                        <div className="row">
+                            <div className="col-md-12">
+                                <div className="page-1-hero-progress">
                                     <ul>
-                                        <li class="active"></li>
-                                        <li class="active"></li>
+                                        <li className="active"></li>
+                                        <li className="active"></li>
                                         <li></li>
                                     </ul>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-12">
-                            <div class="form-top">
+                        <div className="col-md-12">
+                            <div className="form-top">
                                 <h1>Vamos tirar uma foto sua com seu documento?</h1>
                                 <p>Procure um local <span>Iluminado!</span>
                                     Retire os <span>acessórios</span> do rosto e cabeça!
                                     Segure seu <span>documento</span> e de um <span>click!</span></p>
                             </div>
                         </div>
-                        <div class="document-tittle">
+                        <div className="document-tittle">
                             <h2>Enviar imagens</h2>
                         </div>
                         <div className="flexDiv" style={{ 'display': 'flex', 'flexWrap': 'wrap' }}>
-                            <div class="col-md-6">
+                            <div className="col-md-6" id="FlexDown">
 
                                 <UploadDocument
                                     imgSrc={this.state.src}
@@ -97,13 +97,13 @@ class Pag17 extends Component {
                                 />
                             </div>
 
-                            <div class="col-md-6"  style={{ 'paddingLeft': "5px" }} >
-                                <div class="image-holder main-image" style={{ 'marginTop': "0px" }}>
-                                    <figure><img src="images/man_4.png" alt="" style={{ 'minHeight': '350px', 'width': "auto" }} /></figure>
+                            <div className="col-md-6" className='imgMan'   >
+                                <div className="image-holder main-image" id="contendMan" style={{ 'marginTop': "0px" }}>
+                                    <img src="images/man_4.png"  alt=""  />
                                 </div>
                             </div>
-                            <div class="col-md-12">
-                                <div class="page-1-hero-btn">
+                            <div className="col-md-12">
+                                <div className="page-1-hero-btn">
                                     <button className="btn" onClick={this.back}>
                                         VOLTAR
                                     </button>
@@ -119,11 +119,11 @@ class Pag17 extends Component {
                     </div>
                 </section>
 
-                <section class="cashback page-1-cashback page-6-cashback page-7-cashback page-10-cashback page-12-cashback">
-                    <div class="container">
-                        <img src="images/dark-bg.svg" alt="" class="cashback-bg" />
-                        <img src="images/visa_card.png" alt="" class="visa_card" />
-                        <img src="images/4_arrows.svg" alt="" class="arrows_4" />
+                <section className="cashback page-1-cashback page-6-cashback page-7-cashback page-10-cashback page-12-cashback">
+                    <div className="container">
+                        <img src="images/dark-bg.svg" alt="" className="cashback-bg" />
+                        <img src="images/visa_card.png" alt="" className="visa_card" />
+                        <img src="images/4_arrows.svg" alt="" className="arrows_4" />
                     </div>
                 </section>
 

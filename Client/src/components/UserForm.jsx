@@ -330,17 +330,8 @@ export class UserForm extends Component {
             values={values}
           />
         );
+    
       case 9:
-        return (
-          <Pag17
-            nextStep={this.nextStep}
-            prevStep={this.prevStep}
-            handleChange={this.handleChange}
-            values={values}
-          />
-        
-        );
-      case 10:
         return (
           <DocumentType
           nextStep={this.nextStep}
@@ -349,7 +340,7 @@ export class UserForm extends Component {
           values={values}
         />
         )
-      case 11:
+      case 10:
         return (
           <IdPic
             nextStep={this.nextStep}
@@ -358,7 +349,7 @@ export class UserForm extends Component {
             values={values}
           />
         );
-      case 12:
+      case 11:
         return (
           <IdPicBackSide
             nextStep={this.nextStep}
@@ -367,6 +358,16 @@ export class UserForm extends Component {
             values={values}
           />
         );
+        case 12:
+          return (
+            <Pag17
+              nextStep={this.nextStep}
+              prevStep={this.prevStep}
+              handleChange={this.handleChange}
+              values={values}
+            />
+          
+          );
       case 13:
         return (
           <IncomeProof
