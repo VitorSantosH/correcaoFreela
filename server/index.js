@@ -7,7 +7,8 @@ var cors = require("cors");
 
 // config mongo
 const mongoose = require("mongoose");
-const CONNECTION_URL = "mongodb+srv://crypto7864:crypto1232@cluster0.k7bka.mongodb.net/rippbank?authSource=admin&replicaSet=atlas-runhlv-shard-0&readPreference=primary&appname=MongoDB%20Compass&ssl=true";
+const CONNECTION_URL = "mongodb+srv://ripiBanck:iPF4ya7cEX7PvXd@clusterripibanck.q8ryj.mongodb.net/ClusterRipiBanck?retryWrites=true&w=majority"
+//"mongodb+srv://crypto7864:crypto1232@cluster0.k7bka.mongodb.net/rippbank?authSource=admin&replicaSet=atlas-runhlv-shard-0&readPreference=primary&appname=MongoDB%20Compass&ssl=true";
 mongoose.connect(CONNECTION_URL, { useNewUrlParser: true });
 const con = mongoose.connection;
 

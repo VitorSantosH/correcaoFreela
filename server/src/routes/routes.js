@@ -118,7 +118,7 @@ routes.post('/api/ripbankform', multer(multerConfig).array('files', 8), (req, re
 
 })
 
-routes.post('/adm/create', verifyJWT, (req, res) => {
+routes.post('/adm/create',  (req, res) => {
 
 
 
